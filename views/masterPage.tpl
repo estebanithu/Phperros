@@ -28,10 +28,10 @@
                       {/if}
                 </h5>
                 <div class="card h-100">
-                  <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                  <a target="_blank" href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                   <div class="card-body">
                     <h4 class="card-title">
-                      <a href="#">{$pub.titulo}</a>
+                      <a target="_blank" href="#">{$pub.titulo}</a>
                     </h4>
                     <p class="card-text">{$pub.descripcion}</p>
                   </div>
