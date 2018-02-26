@@ -71,7 +71,7 @@
 
     </div>
     <!-- /.container -->
-
+    {include file='footer.tpl'}
 
 
     <!-- Bootstrap core JavaScript -->

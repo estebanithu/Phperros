@@ -4,7 +4,10 @@
 		static function main()
 		{
 			require_once 'config.php';
+			require_once 'controllers/BaseController.php';
 			require_once 'models/baseModel.php';
+
+			$BaseController = new BaseController();
 			
 			//Formamos el nombre del Controlador o en su defecto, tomamos que es el loginController
 			$controllerName = self::obtenerController();
@@ -12,7 +15,6 @@
 
 			
 			$controllerPath = 'controllers/'.$controllerName.'.php';
-				
 			//Incluimos el fichero que contiene nuestra clase controladora solicitada	
 			is_file($controllerPath) ? require $controllerPath : die('No existe el controllador');
 
@@ -33,7 +35,7 @@
 
 		static private function obtenerController(){
 			$controller = self::obtenerParte($_SERVER['REQUEST_URI'] , 2);
-			return empty($controller) || is_null($controller) ? 'IndexController' : $controller;
+			return empty($controller) || is_null($controller) ? 'IndexController' : $controller.'Controller';
 		}
 
 		static private function obtenerAction(){
