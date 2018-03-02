@@ -6,9 +6,9 @@
 	<div class="login">
 		<h4>Ingresar a Phperros&Cia.</h4>
 			<hr>
-        		<form class="login-inner">
-    				<input type="email" class="form-control email" id="email-input" placeholder="Email">
-    				<input type="password" class="form-control password" id="password-input" placeholder="Contraseña">
+        		<form method="POST" action="Login/login" class="login-inner">
+    				<input type="email" class="form-control email" name="email" id="email-input" placeholder="Email">
+    				<input type="password" class="form-control password" name="password" id="password-input" placeholder="Contraseña">
 					<label class="checkbox-inline">
 						<!--<input type="checkbox" id="remember" value="Remember me"> Remember me-->
 					</label>

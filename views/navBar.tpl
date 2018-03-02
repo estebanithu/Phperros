@@ -7,13 +7,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="Index">Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Login">Iniciar sesión</a>
+
+        {if ($hayUsuarioLogueado)}
+          <li class="nav-item active">
+              <a class="nav-link" href="">Hola, {$usuarioLogueado.nombre}!</a>
+              <span class="sr-only">(current)</span>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="Login/Logout">Cerrar sesión</a>
+          </li>
+          {else}
+              <a class="nav-link" href="Login">Iniciar sesión</a>
+              <span class="sr-only">(current)</span>
+          {/if}
         </li>
       </ul>
     </div>
