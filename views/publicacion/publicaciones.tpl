@@ -3,7 +3,7 @@
 <body>
 {include file='navBar.tpl'}
 <div class="container">
-	
+	{$cantidad}
 </div>
 	{include file='footer.tpl'}
 </body>
