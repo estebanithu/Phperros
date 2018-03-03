@@ -11,8 +11,18 @@
 			$this->registroModel = new RegistroModel();
 		}
 
-		public function index(){
+		public function index($codError=NULL){
+			if(!is_null($codError)){
+				$error = $this->obtenerMensajeDeError($codError);
+				$this->miSmarty->assign("error", $error);
+			}
 			$this->miSmarty->display('login/index.tpl');
+		}
+
+		private function obtenerMensajeDeError($codError){
+			if($codError == 1){
+				return 'Usuario/Password Incorrectos';
+			}
 		}
 
 		public function login(){
@@ -22,10 +32,8 @@
 				if($this->registroModel->existeEmailYPassword($email, $password)){
 					$this->setearDatosUsuarioEnSession($email);
 					$this->redirigir('Index');
-				}else{
-					$this->miSmarty->assign("error", 'Usuario/Password Incorrectos');
-					$this->miSmarty->display('login/index.tpl');
-
+				}else{			
+					$this->redirigir('Login','index',1);
 				}
 			}
 		}

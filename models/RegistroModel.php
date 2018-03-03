@@ -10,7 +10,7 @@
 			$cn = $this->getConexion();
 
 			$cn->consulta(
-				"SELECT * FROM usuarios WHERE email = :email AND password = :password",
+				"SELECT * FROM usuarios WHERE email=:email AND password=:password",
 				array(
 					array("email", $email, 'string'),
 					array("password", $password, 'string')

@@ -27,8 +27,9 @@
 			return isset($_SESSION['usuarioLogueado']);
 		}
 
-		protected function redirigir($controller,$action=NULL){
-			$url = !is_null($action) ? $this->home.$controller.$action : $this->home.$controller;
+		protected function redirigir($controller,$action=NULL,$parameter=NULL){
+			$url = !is_null($action) ? $this->home.$controller.'/'.$action : $this->home.$controller;
+			$url = !is_null($parameter) ? $url.'/'.$parameter: $url;
 			header("Location: ".$url);
 		}
 
