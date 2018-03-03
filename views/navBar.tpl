@@ -7,6 +7,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <form id="form_busqueda" method="GET" action="Publicacion/vertodas">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend" 
+                      onclick="document.getElementById('form_busqueda').submit();return false;">
+                        <a class="fa fa-search input-group-text" style="color:gray"></a>
+                  </div>
+                   <input id="search-input" class="form-control input-md" placeholder="Buscar..." autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1" name="busqueda">
+                </div>
+            </form>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" href="Index">Home
             <span class="sr-only">(current)</span>

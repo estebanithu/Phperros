@@ -14,4 +14,13 @@
 			var_dump($id);die();
 		}
 
+		public function vertodas(){
+
+			if($_GET && isset($_GET['busqueda'])){
+
+			}			
+			$this->miSmarty->display('publicaciones.tpl');
+			
+		}
+
 	}

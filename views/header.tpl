@@ -1,5 +1,5 @@
   <head>
-
+    <base href="/Phperros/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -12,5 +12,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/3-col-portfolio.css" rel="stylesheet">
+
+    <link href="fonts/fonts-awesome/css/font-awesome.min.css" rel="stylesheet">
 
   </head>

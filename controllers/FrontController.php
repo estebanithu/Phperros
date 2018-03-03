@@ -39,22 +39,31 @@
 
 
 		static private function obtenerController(){
-			$controller = self::obtenerParte($_SERVER['REQUEST_URI'] , 2);
+			$ruta = $_SERVER['REQUEST_URI'];
+			$controller = self::obtenerParte($ruta, 2);
+			if(!empty($controller) && !is_null($controller))
+				$controller = explode("?",$controller)[0];
 			return empty($controller) || is_null($controller) ? 'IndexController' : $controller.'Controller';
 		}
 
 		static private function obtenerAction(){
-			$action =  self::obtenerParte($_SERVER['REQUEST_URI'] , 3);
+			$ruta = $_SERVER['REQUEST_URI'];
+			$action =  self::obtenerParte($ruta , 3);
+			if(!empty($action) && !is_null($action))
+				$action = explode("?",$action)[0];
 			return empty($action) || is_null($action) ? 'index' : $action;
 		}
 
 		static private function obtenerParametro(){
-			$parametro =  self::obtenerParte($_SERVER['REQUEST_URI'] , 4);
+			$ruta = $_SERVER['REQUEST_URI'];
+			$parametro =  self::obtenerParte($ruta , 4);
+			if(!empty($parametro) && !is_null($parametro))
+				$parametro = explode("?",$parametro)[0];
 			return $parametro;
 		}
 
 		static private function obtenerParte($ruta, $parte){
-			$partes = explode('/', $ruta);
+			$partes = explode("/",$ruta);
 			if(isset($partes[$parte])){
 				$retorno = $partes[$parte];
 			}else{
