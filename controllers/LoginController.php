@@ -5,7 +5,7 @@
 		public function __construct(){
 			parent::__construct();
 			if($this->estaLogueado()){
-				$this->redirigirAHome();
+				$this->redirigir('Index');
 			}
 			require_once('models/RegistroModel.php');
 			$this->registroModel = new RegistroModel();

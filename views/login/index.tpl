@@ -14,6 +14,12 @@
 					</label>
 					<input class="btn btn-block btn-lg btn-success submit" type="submit" value="Ingresar">
 				</form>
+				{if isset($error)}
+				<hr>
+					<div class="alert alert-danger">
+					  <strong>Error!</strong> {$error}.
+					</div>
+				{/if}
 			<a href="Registro" class="btn btn-sm btn-primary register">Registrarse</a>
 			<!--<a href="#" class="btn btn-sm btn-default forgot">Forgot your password?</a>-->
 	</div>

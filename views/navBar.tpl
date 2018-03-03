@@ -14,7 +14,7 @@
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="Login/Logout">Cerrar sesión</a>
+              <a class="nav-link" href="Login/logout">Cerrar sesión</a>
           </li>
           {else}
               <a class="nav-link" href="Login">Iniciar sesión</a>
