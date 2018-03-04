@@ -30,10 +30,24 @@
 			</ul>
 		</div>
 	</div>
-	<div id="container-publicaciones" class="row col-md-9 col-sm-9 col-xs-12">
+	<div id="container-publicaciones" class="col-md-9 col-sm-9 col-xs-12">
+		<div class="row">
+			 <div class="radio">
+  				<label><input type="radio" name="encontradosperdidos" value=0 checked>Todos</label>
+			</div>
+			<div class="radio">
+  				<label><input type="radio" name="encontradosperdidos" value=1 >Encontrados</label>
+			</div>
+			<div class="radio">
+  				<label><input type="radio" name="encontradosperdidos" value=2 >Perdidos</label>
+			</div>
+		</div>
+		<div class="row">
 			{foreach from=$publicaciones item=pub}
 				{include file='publicacion/publicacion.tpl'}
 			{/foreach}
+		</div>
+			
 	</div>
 </div>
 	{include file='footer.tpl'}

@@ -25,7 +25,7 @@
 
 		public function vertodas(){
 
-			$filtro = $this->obtenerFiltro($_GET);
+			$filtro = $this->obtenerFiltro($_GET?$_GET:$_POST);
 			$busqueda=$filtro->busqueda;
 			$publicaciones=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
 			$especies = $this->especiesModel->obtenerEspecies();
@@ -41,10 +41,23 @@
 		}
 
 		private function obtenerFiltro($dic){
+
 			$filtro = new PublicacionFiltro();
 			if($dic){
 				if(isset($dic['busqueda'])){
 					$filtro->busqueda=$dic['busqueda'];
+				}
+				if(isset($dic['encontradoperdido'])){
+					$filtro->encontradoperdido=$dic['encontradoperdido'];
+				}
+				if(isset($dic['especies'])){
+					$filtro->especies=$dic['especies'];
+				}
+				if(isset($dic['razas'])){
+					$filtro->razas=$dic['razas'];
+				}
+				if(isset($dic['barrios'])){
+					$filtro->barrios=$dic['barrios'];
 				}
 			}
 			return $filtro;
