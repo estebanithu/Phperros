@@ -7,8 +7,8 @@
 		<h4>Ingresar a Phperros&Cia.</h4>
 			<hr>
         		<form method="POST" action="Login/login" class="login-inner">
-    				<input type="email" class="form-control email" name="email" id="email-input" placeholder="Email">
-    				<input type="password" class="form-control password" name="password" id="password-input" placeholder="Contraseña">
+    				<input type="email" required class="form-control email" name="email" id="email-input" placeholder="Email">
+    				<input type="password" required class="form-control password" name="password" id="password-input" placeholder="Contraseña">
 					<label class="checkbox-inline">
 						<!--<input type="checkbox" id="remember" value="Remember me"> Remember me-->
 					</label>
