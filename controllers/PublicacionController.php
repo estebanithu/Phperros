@@ -5,8 +5,14 @@
 		public function __construct(){
 			parent::__construct();
 			require_once 'models/PublicacionesModel.php';
+			require_once 'models/RazaModel.php';
+			require_once 'models/EspecieModel.php';
+			require_once 'models/BarrioModel.php';
 			require_once 'models/PublicacionFiltro.php';
 			$this->publicacionesModel = new PublicacionesModel();
+			$this->especiesModel = new EspecieModel();
+			$this->razasModel = new RazaModel();
+			$this->barriosModel = new BarrioModel();
 		}
 
 		public function index(){
@@ -21,13 +27,17 @@
 
 			$filtro = $this->obtenerFiltro($_GET);
 			$busqueda=$filtro->busqueda;
-			$cantidad=count($this->publicacionesModel->obtenerPublicacionesConFiltro($filtro));
+			$publicaciones=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
+			$especies = $this->especiesModel->obtenerEspecies();
+			$razas = $this->razasModel->obtenerRazas();
+			$barrios = $this->barriosModel->obtenerBarrios();
 
-			$this->miSmarty->assign('cantidad',$cantidad);	
 			$this->miSmarty->assign('busqueda',$busqueda);
-			$this->miSmarty->display('publicacion/publicaciones.tpl');
-
-			
+			$this->miSmarty->assign('publicaciones',$publicaciones);	
+			$this->miSmarty->assign('especies',$especies);
+			$this->miSmarty->assign('razas',$razas);
+			$this->miSmarty->assign('barrios',$barrios);
+			$this->miSmarty->display('publicacion/publicaciones.tpl');	
 		}
 
 		private function obtenerFiltro($dic){

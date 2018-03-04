@@ -1,0 +1,8 @@
+/*bootstrap redefine*/
+.row{
+	margin:0px;
+}
+/*bootstrap redefine*/
+ul{
+	list-style-type: none;
+}
