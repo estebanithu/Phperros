@@ -6,7 +6,7 @@
 	<div class="login">
 		<h4>Registrarse en Phperros&Cia.</h4>
 			<hr>
-        		<form method="POST" action="Registro/registro" class="login-inner">
+        		<form id="formRegistro" method="POST" action="Registro/registro" class="login-inner">
     				<input type="text" required class="form-control" id="nombre-completo" name="nombre-completo" placeholder="Nombre Completo">
     				<input type="email" required class="form-control email" id="email" name="email" placeholder="Email">
     				<input type="password" required class="form-control password" id="password" name="password" placeholder="Contraseña">
