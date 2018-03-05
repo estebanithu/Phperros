@@ -25,7 +25,7 @@
 
 		public function vertodas(){
 
-			$filtro = $this->obtenerFiltro($_GET?$_GET:$_POST);
+			$filtro = $this->obtenerFiltro($_GET);
 			$busqueda=$filtro->busqueda;
 			$publicaciones=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
 			$especies = $this->especiesModel->obtenerEspecies();
@@ -37,7 +37,15 @@
 			$this->miSmarty->assign('especies',$especies);
 			$this->miSmarty->assign('razas',$razas);
 			$this->miSmarty->assign('barrios',$barrios);
-			$this->miSmarty->display('publicacion/publicaciones.tpl');	
+			$this->miSmarty->display('publicacion/publicacionespage.tpl');	
+		}
+
+		public function obtenertodas(){
+
+			$filtro = $this->obtenerFiltro($_POST);
+			$publicaciones=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
+			$this->miSmarty->assign('publicaciones',$publicaciones);	
+			echo $this->miSmarty->display('publicacion/publicaciones.tpl');//json_encode($publicaciones);
 		}
 
 		private function obtenerFiltro($dic){

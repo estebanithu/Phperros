@@ -2,6 +2,7 @@
 _pub={};
 _pub.g={};//variables globales
 _pub.f={};//funciones
+_pub.faux={};//funciones auxiliares
 _pub.servcom={};//comunicaciones con el servidor
 _pub.servcom.f={};
 
@@ -27,20 +28,17 @@ _pub.servcom.f.realizarBusquedaConFiltros = function(filtro,callback){
     jsondata = JSON.stringify(jsondata);
     $.ajax({
         type: "POST",
-        url: "PublicacionesController/vertodas",
+        url: "Publicacion/obtenertodas",
         data: jsondata,
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        dataType: "html",
         success: function (response) {
-        	alert("sucess")
             callback(response)
         },
         failure: function (response) {
-        	alert("failure")
             callback(response)
         },
         error: function (response) {
-        	alert("error")
             callback(response)
         }
     });
@@ -77,9 +75,10 @@ _pub.f.filtrar = function(){
 	_pub.g.filtrosaplicados["BUSQUEDA"]=$("#search-input").val();
 	_pub.g.filtrosaplicados["ENCONTRADOPERDIDO"]=$('input[name=encontradosperdidos]:checked').val();
 
-	_pub.servcom.f.realizarBusquedaConFiltros(_pub.g.filtrosaplicados,_pub.f.busquedaConFiltrosRealizada);
+	_pub.servcom.f.realizarBusquedaConFiltros(_pub.g.filtrosaplicados,_pub.f.busquedaConFiltrosCompletada);
 }
 
-_pub.f.busquedaConFiltrosRealizada = function(elems){
-
+_pub.f.busquedaConFiltrosCompletada = function(publicaciones){
+		var divpublicaciones = $("#container-publicaciones");
+		divpublicaciones.html(publicaciones)
 }
