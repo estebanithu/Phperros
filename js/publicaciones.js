@@ -25,12 +25,12 @@ _pub.servcom.f.realizarBusquedaConFiltros = function(filtro,callback){
 					especies:filtro["ESPECIE"],
 					razas:filtro["RAZA"],
 					barrios:filtro["BARRIO"]};
-    jsondata = JSON.stringify(jsondata);
+    //jsondata = JSON.stringify(jsondata);
     $.ajax({
         type: "POST",
         url: "Publicacion/obtenertodas",
         data: jsondata,
-        contentType: "application/json; charset=utf-8",
+       // contentType: "application/json; charset=utf-8",
         dataType: "html",
         success: function (response) {
             callback(response)

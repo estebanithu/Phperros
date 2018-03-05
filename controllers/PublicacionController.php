@@ -41,7 +41,6 @@
 		}
 
 		public function obtenertodas(){
-
 			$filtro = $this->obtenerFiltro($_POST);
 			$publicaciones=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
 			$this->miSmarty->assign('publicaciones',$publicaciones);	

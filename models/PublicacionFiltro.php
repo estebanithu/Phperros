@@ -17,9 +17,8 @@
 
     		$abiertassql = $this->abiertas==1?"abierto=1":($this->abiertas==2?"abierto=0":"");
     		//TODO: mejorar esta
-    		$busquedasql = !$this->IsNullOrEmptyString($this->busqueda)?"title=".$this->busqueda:"";
-    		$encontradoperdidosql = 
-    			$this->encontradoperdido==1?"tipo=E":($this->encontradoperdido==2?"tipo=P":"");
+    		$busquedasql = !$this->IsNullOrEmptyString($this->busqueda)?"titulo LIKE '%".$this->busqueda."%'":"";
+    		$encontradoperdidosql = $this->encontradoperdido==1?"tipo='E'":($this->encontradoperdido==2?"tipo='P'":"");
     		$especiessql = count($this->especies)>0?"especie_id in (".implode (", ", $this->especies).")":"";
     		$razassql = count($this->razas)>0?"raza_id in (".implode (", ", $this->razas).")":"";
     		$barriossql = count($this->barrios)>0?"barrio_id in (".implode (", ", $this->barrios).")":"";

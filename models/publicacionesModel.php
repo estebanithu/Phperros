@@ -12,9 +12,5 @@
 		    $cn = $this->getConexion();
 		    $cn->consulta("SELECT * from publicaciones WHERE ".$filtro->toSQL());
 		    return $cn->restantesRegistros();
-		    /*if($cn->cantidadRegistros()>0)
-		    	return $cn->restantesRegistros();
-		    else
-		    	return [];*/
 		}
 	}
