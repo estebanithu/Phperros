@@ -6,6 +6,7 @@
     <meta name="author" content="">
 
     <title>Phperros&Cia. perdidos y encontrados</title>
+    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

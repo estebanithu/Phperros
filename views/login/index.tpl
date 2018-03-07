@@ -1,5 +1,5 @@
 {include file='header.tpl'}
-<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/login-registro.css">
 <body>
 {include file='navBar.tpl'}
 <div class="container">
