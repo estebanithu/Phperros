@@ -9,7 +9,7 @@
 			<h3 data-toggle="collapse" data-target="#filtros-especies">Especies</h3>
 			<ul id="filtros-especies">
 				{foreach from=$especies item=esp}
-					<li data-id="{$esp.id}">{$esp.nombre}</li>
+					<li data-id="{$esp.id}" data-tipo="especie">{$esp.nombre}</li>
 				{/foreach}
 			</ul>
 		</div>
@@ -17,7 +17,7 @@
 			<h3 data-toggle="collapse" data-target="#filtros-razas">Razas</h3>
 			<ul id="filtros-razas">
 				{foreach from=$razas item=raz}
-					<li data-id="{$raz.id}">{$raz.nombre}</li>
+					<li data-id="{$raz.id}" data-especieid="{$raz.especie_id}" data-tipo="raza">{$raz.nombre}</li>
 				{/foreach}
 			</ul>
 		</div>

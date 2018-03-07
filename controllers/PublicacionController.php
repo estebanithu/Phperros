@@ -32,6 +32,7 @@
 			$razas = $this->razasModel->obtenerRazas();
 			$barrios = $this->barriosModel->obtenerBarrios();
 
+			$this->miSmarty->assign('buscadorsinform',true);
 			$this->miSmarty->assign('busqueda',$busqueda);
 			$this->miSmarty->assign('publicaciones',$publicaciones);	
 			$this->miSmarty->assign('especies',$especies);
