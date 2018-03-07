@@ -1,19 +1,25 @@
 {include file='header.tpl'}
-<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/login-registro.css">
 <body>
 {include file='navBar.tpl'}
 <div class="container">
 	<div class="login">
 		<h4>Ingresar a Phperros&Cia.</h4>
 			<hr>
-        		<form class="login-inner">
-    				<input type="email" class="form-control email" id="email-input" placeholder="Email">
-    				<input type="password" class="form-control password" id="password-input" placeholder="Contraseña">
+        		<form method="POST" action="Login/login" class="login-inner">
+    				<input type="email" required class="form-control email" name="email" id="email-input" placeholder="Email">
+    				<input type="password" required class="form-control password" name="password" id="password-input" placeholder="Contraseña">
 					<label class="checkbox-inline">
 						<!--<input type="checkbox" id="remember" value="Remember me"> Remember me-->
 					</label>
 					<input class="btn btn-block btn-lg btn-success submit" type="submit" value="Ingresar">
 				</form>
+				{if isset($error)}
+				<hr>
+					<div class="alert alert-danger">
+					  <strong>Error!</strong> {$error}.
+					</div>
+				{/if}
 			<a href="Registro" class="btn btn-sm btn-primary register">Registrarse</a>
 			<!--<a href="#" class="btn btn-sm btn-default forgot">Forgot your password?</a>-->
 	</div>

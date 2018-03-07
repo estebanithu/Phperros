@@ -50,3 +50,6 @@ body {
 		padding: 8px;
 	}
 }
+#error-password{
+	display: none;
+}
