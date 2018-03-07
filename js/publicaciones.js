@@ -65,6 +65,7 @@ _pub.f.aplicarFiltro = function(elem,type){
 	var indexOf = _pub.g.filtrosaplicados[type].indexOf(id);
 	var aplicarFiltro = indexOf==-1;
 
+	//SACAR ESTO DE AQUI
 	if(aplicarFiltro)
 		_pub.g.filtrosaplicados[type].push(id);
 	else
@@ -153,6 +154,7 @@ _pub.f.mostrarOcultarRazas = function(){
 
 _pub.f.filtrar = function(){
 
+	//IMPLEMENTAR ESTO DE AQUI
 	//$("#filtros-especies .filtro-seleccionado").data("id") de todos los selecionados
 	//$("#filtros-razas .filtro-seleccionado").data("id") de todos los selecionados
 	//$("#filtros-barrios .filtro-seleccionado").data("id") de todos los selecionados
