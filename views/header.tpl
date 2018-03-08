@@ -13,5 +13,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/3-col-portfolio.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="css/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="css/owlcarousel/owl.theme.default.min.css">
 
   </head>

@@ -10,8 +10,8 @@
 			$this->miSmarty->display('masterPage.tpl');
 		}
 
-		public function ver($id){
-			var_dump($id);die();
+		public function verDetalle($id){
+			$this->miSmarty->display('publicacion/publicacion-detalle.tpl');
 		}
 
 	}
