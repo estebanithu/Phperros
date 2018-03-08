@@ -11,7 +11,9 @@ _pub.g.filtrosaplicados = {
 	"ENCONTRADOPERDIDO": 0,//0 TODOS, 1 ENCONTRADOS, 2 PERDIDOS
     "ESPECIE": [],
     "RAZA": [],
-    "BARRIO": []
+    "BARRIO": [],
+    "PAGE":0,
+    "CANT":10
 }
 _pub.g.especiesseleccionadas=[];
 _pub.g.razasseleccionadasporespecie={};
@@ -27,7 +29,9 @@ _pub.servcom.f.realizarBusquedaConFiltros = function(filtro,callback){
 					encontradoperdido:filtro["ENCONTRADOPERDIDO"],
 					especies:filtro["ESPECIE"],
 					razas:filtro["RAZA"],
-					barrios:filtro["BARRIO"]};
+					barrios:filtro["BARRIO"],
+					page:filtro["PAGE"],
+					cant:filtro["CANT"]};
 	console.log(jsondata);
     //jsondata = JSON.stringify(jsondata);
     $.ajax({
@@ -55,6 +59,7 @@ _pub.f.initialize = function(){
 	$(document).on("click","#filtros-barrios li",function(){_pub.f.aplicarFiltroBarrio($(this))})
 	$(document).on("keyup","#search-input",_pub.f.filtrar);
 	$(document).on("change","input[name=encontradosperdidos]",_pub.f.filtrar);
+	$(document).on("click",".pagination li.page-number",function(){_pub.f.aplicarPaginado($(this))});
 
 
 	var buscador = $("#form_busqueda").html();
@@ -133,6 +138,12 @@ _pub.f.aplicarEstiloFiltro = function(elem,seleccionar){
 		elem.removeClass("filtro-seleccionado")
 }
 
+_pub.f.aplicarPaginado = function(elem){
+
+	$(".pagination li.page-number").removeClass("active");
+	elem.addClass("active");
+	_pub.f.filtrar();
+}
 
 _pub.f.mostrarOcultarRazas = function(){
 
@@ -164,6 +175,7 @@ _pub.f.mostrarOcultarRazas = function(){
 }
 
 
+
 _pub.f.filtrar = function(){
 
 	_pub.g.filtrosaplicados["ESPECIE"]=_pub.g.especiesseleccionadas;
@@ -174,10 +186,9 @@ _pub.f.filtrar = function(){
 	});
 	_pub.g.filtrosaplicados["RAZA"]=razas;
 	_pub.g.filtrosaplicados["BARRIO"]=_pub.g.barriosseleccionados;
-	//LOS BARRIOS YA SE METEN
 	_pub.g.filtrosaplicados["BUSQUEDA"]=$("#search-input").val();
 	_pub.g.filtrosaplicados["ENCONTRADOPERDIDO"]=$('input[name=encontradosperdidos]:checked').val();
-
+	_pub.g.filtrosaplicados["PAGE"]=parseInt($(".pagination li.page-number.active span").html())-1;
 	_pub.servcom.f.realizarBusquedaConFiltros(_pub.g.filtrosaplicados,_pub.f.busquedaConFiltrosCompletada);
 }
 

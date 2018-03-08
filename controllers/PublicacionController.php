@@ -27,25 +27,43 @@
 
 			$filtro = $this->obtenerFiltro($_GET);
 			$busqueda=$filtro->busqueda;
-			$publicaciones=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
+			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
+			$publicaciones=$publicacionesconsulta->publicaciones;
+			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
+			$cantidadPaginasDePublicaciones=($cantidadTotalPublicaciones%$filtro->cant)+1;
+			$paginaseleccionada=$filtro->page+1;
 			$especies = $this->especiesModel->obtenerEspecies();
 			$razas = $this->razasModel->obtenerRazas();
 			$barrios = $this->barriosModel->obtenerBarrios();
 
 			$this->miSmarty->assign('buscadorsinform',true);
 			$this->miSmarty->assign('busqueda',$busqueda);
-			$this->miSmarty->assign('publicaciones',$publicaciones);	
+			$this->miSmarty->assign('publicaciones',$publicaciones);
+			$this->miSmarty->assign('canttotalpublicaciones',$cantidadTotalPublicaciones);	
+			$this->miSmarty->assign('cantpages',$cantidadPaginasDePublicaciones);
+			$this->miSmarty->assign('paginaseleccionada',$paginaseleccionada);
+
 			$this->miSmarty->assign('especies',$especies);
 			$this->miSmarty->assign('razas',$razas);
 			$this->miSmarty->assign('barrios',$barrios);
+
 			$this->miSmarty->display('publicacion/publicacionespage.tpl');	
 		}
 
 		public function obtenertodas(){
 			$filtro = $this->obtenerFiltro($_POST);
-			$publicaciones=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
-			$this->miSmarty->assign('publicaciones',$publicaciones);	
-			echo $this->miSmarty->display('publicacion/publicaciones.tpl');//json_encode($publicaciones);
+			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
+			$publicaciones=$publicacionesconsulta->publicaciones;
+			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
+			$cantidadPaginasDePublicaciones=$cantidadTotalPublicaciones/$filtro->cant;
+			$paginaseleccionada=$filtro->page+1;
+
+			$this->miSmarty->assign('publicaciones',$publicaciones);
+			$this->miSmarty->assign('canttotalpublicaciones',$cantidadTotalPublicaciones);	
+			$this->miSmarty->assign('cantpages',$cantidadPaginasDePublicaciones);
+			$this->miSmarty->assign('paginaseleccionada',$paginaseleccionada);	
+
+			echo $this->miSmarty->display('publicacion/publicaciones.tpl');
 		}
 
 		private function obtenerFiltro($dic){
@@ -66,6 +84,12 @@
 				}
 				if(isset($dic['barrios'])){
 					$filtro->barrios=$dic['barrios'];
+				}
+				if(isset($dic['page'])){
+					$filtro->page=$dic['page'];
+				}
+				if(isset($dic['cant'])){
+					$filtro->cant=$dic['cant'];
 				}
 			}
 			return $filtro;

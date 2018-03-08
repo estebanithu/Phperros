@@ -11,7 +11,7 @@
     	public $page=0; 
     	public $cant=10;
 
-    	public function toSQL(){
+    	public function toSQLSinPaginado(){
 
     		$sqlfilters= [];
 
@@ -42,6 +42,10 @@
     		else
 				return "1=1";
     	}
+
+        public function toSQLConPaginado(){
+            return $this->toSQLSinPaginado()." LIMIT ".($this->page*$this->cant).",".$this->cant;
+        }
 
     	//TODO: pasarla a helper
     	private function IsNullOrEmptyString($question){
