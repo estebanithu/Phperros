@@ -10,6 +10,9 @@
 
 		public function index(){
 			$publicaciones = $this->obtenerPublicacionesHome();
+			foreach ($publicaciones as $key => $value) {
+				$publicaciones[$key]['img'] = 'uploads/'.$value['id'].'/1.jpg';
+			}
 			$this->miSmarty->assign("publicaciones", $publicaciones);
 			$this->miSmarty->display('masterPage.tpl');
 		}

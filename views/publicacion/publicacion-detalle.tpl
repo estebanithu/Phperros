@@ -1,25 +1,40 @@
 {include file='header.tpl'}
-
 <body>
+<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="js/publicacion-detalle.js"></script>
 {include file='navBar.tpl'}
-<div class="container">
-	<h1>Titulo</h1>
-	<hr>
-	<div>Especie > Raza</div>
-		<section id="contenedor-galeria-descripcion" style="padding: 1%;">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-lg-8" id="galeria">
-				<div style="width: 100%; height: 100%; background: red;"></div></div>
-				<div class="col-xs-6 col-lg-4">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Scelerisque eleifend donec pretium vulputate. Curabitur gravida arcu ac tortor dignissim convallis aenean. Justo laoreet sit amet cursus sit amet dictum sit amet. At varius vel pharetra vel. Risus nullam eget felis eget nunc lobortis mattis aliquam. Fermentum iaculis eu non diam phasellus. Consectetur purus ut faucibus pulvinar elementum integer. Mauris pharetra et ultrices neque ornare aenean euismod elementum. Non sodales neque sodales ut etiam. Tincidunt eget nullam non nisi. Odio euismod lacinia at quis risus sed vulputate odio ut. Urna et pharetra pharetra massa massa ultricies mi quis. Elementum nisi quis eleifend quam adipiscing. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit. Adipiscing vitae proin sagittis nisl. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Porta non pulvinar neque laoreet. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Bibendum neque egestas congue quisque.
-				</div>
-		</section>
+<div class="container" style="margin-top: 20px;">
+	<h1>{$publicacion.titulo}</h1>
+
+	<div>{$publicacion.especie} > {$publicacion.raza}</div>	
+	<section id="contenedor-galeria-descripcion" style="padding: 1%;">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-lg-8" id="galeria">
+			<div class="owl-carousel owl-theme">
+				{foreach from=$imagenes item=img}
+					<div><img class="img-responsive" src="{$img}"></div>
+				{/foreach}
+			</div>
+		</div>
+		<div id="descripcion" class="col-xs-6 col-lg-4" style="text-align: justify;">
+			{$publicacion.descripcion}
+		</div>
+	</section>
+	{if $publicacion.tipo == 'E'}
+		<div class="alert alert-success" role="alert" style="text-align: center;" >Encontrado</div>
+	{else}
+		<div class="alert alert-danger" role="alert"  style="text-align: center;">Perdido</div>
+	{/if}
 	<hr>
 	<section id="seccion-preguntas">
 		<h3>Preguntas y respuestas</h3>
 		<ul class="preguntas">
-			<li class="preguntas">¿asdf asdfja asd?</li>
-			<li class="respuesta">de la chota para abajo. no tengo experiencia pero confio en los avances de la ciencia</li>
+			{foreach from=$preguntas item=preg}
+				<li class="pregunta-respuesta" style="list-style:  none; border-bottom: 1px solid rgba(0,0,0,.1);">
+					<article class="pregunta">{$preg.texto}</article>
+					<article class="respuesta" style="margin-left: 2%;">{$preg.respuesta}</article>
+				</li>
+			{/foreach}
 		</ul>
 	</section>
 	

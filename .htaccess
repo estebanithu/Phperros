@@ -1,5 +1,7 @@
 RewriteEngine on
 RewriteRule ^(css) - [L]
+RewriteRule ^(js) - [L]
+RewriteRule ^(uploads) - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /Phperros/index.php?path=$1 [NC,L,QSA]
