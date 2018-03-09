@@ -17,17 +17,17 @@
 			</div>
 		</div>
 		<div id="descripcion" class="col-xs-6 col-lg-4" style="text-align: justify;">
+			{if $publicacion.tipo == 'E'}
+				<div class="alert alert-success" role="alert" style="text-align: center;padding: 0;" >Encontrado</div>
+			{else}
+				<div class="alert alert-danger" role="alert"  style="text-align: center;padding: 0;">Perdido</div>
+			{/if}
 			{$publicacion.descripcion}
 		</div>
 	</section>
-	{if $publicacion.tipo == 'E'}
-		<div class="alert alert-success" role="alert" style="text-align: center;" >Encontrado</div>
-	{else}
-		<div class="alert alert-danger" role="alert"  style="text-align: center;">Perdido</div>
-	{/if}
 	<hr>
 	<section id="seccion-preguntas">
-		<h3>Preguntas y respuestas</h3>
+		<h3><i class="fas fa-comments"></i> Preguntas y respuestas</h3>
 		<ul class="preguntas">
 			{foreach from=$preguntas item=preg}
 				<li class="pregunta-respuesta" style="list-style:  none; border-bottom: 1px solid rgba(0,0,0,.1);">
