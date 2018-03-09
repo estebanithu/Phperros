@@ -9,8 +9,6 @@ _pub.servcom.f={};
 
 _pub.ctes.Todas="Todas";
 
-_pub.g.ultimaseleccioncantidadpaginas=10;
-
 _pub.g.filtrosaplicados = {
 	"BUSQUEDA": "",
 	"ENCONTRADOPERDIDO": 0,//0 TODOS, 1 ENCONTRADOS, 2 PERDIDOS
@@ -18,7 +16,7 @@ _pub.g.filtrosaplicados = {
     "RAZA": [],
     "BARRIO": [],
     "PAGE":0,
-    "CANT":_pub.g.ultimaseleccioncantidadpaginas
+    "CANT":10
 }
 
 _pub.g.cantidadporpagina = {
@@ -81,7 +79,7 @@ _pub.f.initialize = function(){
 	    	value="10000000000000000"//lo hago asi, no molesta
 	    $("#cantidad-x-paginas-selected").data("val", value);
 
-	    _pub.f.filtrar();
+	    _pub.f.filtrar(true);
 
     });
 
@@ -106,7 +104,7 @@ _pub.f.aplicarFiltroEspecie = function(elem){
 	}
 	_pub.f.mostrarOcultarRazas()
 
-	_pub.f.filtrar();
+	_pub.f.filtrar(true);
 
 }
 
@@ -134,7 +132,7 @@ _pub.f.aplicarFiltroRaza = function(elem){
 		razasporespecie.splice(indexaeliminar,1);
 	}
 
-	_pub.f.filtrar();
+	_pub.f.filtrar(true);
 
 }
 
@@ -151,7 +149,7 @@ _pub.f.aplicarFiltroBarrio = function(elem){
 	else
 		_pub.g.barriosseleccionados.splice(indexOf,1);
 
-	_pub.f.filtrar();
+	_pub.f.filtrar(true);
 
 }
 
@@ -166,7 +164,7 @@ _pub.f.aplicarPaginado = function(elem){
 
 	$(".pagination li.page-number").removeClass("active");
 	elem.addClass("active");
-	_pub.f.filtrar();
+	_pub.f.filtrar(false);
 }
 
 _pub.f.mostrarOcultarRazas = function(){
@@ -200,7 +198,7 @@ _pub.f.mostrarOcultarRazas = function(){
 
 
 
-_pub.f.filtrar = function(){
+_pub.f.filtrar = function(cambioconsulta){
 
 	_pub.g.filtrosaplicados["ESPECIE"]=_pub.g.especiesseleccionadas;
 	var razas=[];
@@ -217,10 +215,9 @@ _pub.f.filtrar = function(){
 	var nuevaseleccioncantidadpaginas=$("#cantidad-x-paginas-selected").data("val");
 	var pagina=parseInt($(".pagination li.page-number.active span").html())-1;
 
-	if(_pub.g.ultimaseleccioncantidadpaginas!=nuevaseleccioncantidadpaginas)
+	if(cambioconsulta)
 		pagina=0;
-	_pub.g.ultimaseleccioncantidadpaginas=pagina;
-	
+
 	_pub.g.filtrosaplicados["PAGE"]=pagina;
 	_pub.g.filtrosaplicados["CANT"]=nuevaseleccioncantidadpaginas
 
