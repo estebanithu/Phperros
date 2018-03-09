@@ -16,7 +16,7 @@
 		public function obtenerPublicacionesConFiltro($filtro) {
 		    $cn = $this->getConexion();
 		    $consultaResultado = new PublicacionConsultaResultado();
-		    $cn->consulta("SELECT count(*) from publicaciones WHERE ".$filtro->toSQLSinPaginado());
+		    $cn->consulta("SELECT * from publicaciones WHERE ".$filtro->toSQLSinPaginado());
 		    $consultaResultado->cantTotal=$cn->cantidadRegistros();
 		    $cn->consulta("SELECT * from publicaciones WHERE ".$filtro->toSQLConPaginado());
 		    $consultaResultado->publicaciones = $cn->restantesRegistros();

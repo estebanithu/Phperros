@@ -30,7 +30,7 @@
 			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
 			$publicaciones=$publicacionesconsulta->publicaciones;
 			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
-			$cantidadPaginasDePublicaciones=($cantidadTotalPublicaciones%$filtro->cant)+1;
+			$cantidadPaginasDePublicaciones=$cantidadTotalPublicaciones/$filtro->cant;
 			$paginaseleccionada=$filtro->page+1;
 			$especies = $this->especiesModel->obtenerEspecies();
 			$razas = $this->razasModel->obtenerRazas();
@@ -55,7 +55,8 @@
 			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
 			$publicaciones=$publicacionesconsulta->publicaciones;
 			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
-			$cantidadPaginasDePublicaciones=$cantidadTotalPublicaciones/$filtro->cant;
+			$cantidadPaginasDePublicaciones=$filtro->cant>$cantidadTotalPublicaciones?
+											1:$cantidadTotalPublicaciones/$filtro->cant;
 			$paginaseleccionada=$filtro->page+1;
 
 			$this->miSmarty->assign('publicaciones',$publicaciones);
@@ -63,7 +64,7 @@
 			$this->miSmarty->assign('cantpages',$cantidadPaginasDePublicaciones);
 			$this->miSmarty->assign('paginaseleccionada',$paginaseleccionada);	
 
-			echo $this->miSmarty->display('publicacion/publicaciones.tpl');
+			echo $this->miSmarty->display('publicacion/publicacionesconpaginado.tpl');
 		}
 
 		private function obtenerFiltro($dic){

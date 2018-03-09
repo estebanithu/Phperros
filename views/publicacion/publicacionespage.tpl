@@ -41,13 +41,24 @@
 			<div class="radio">
   				<label><input type="radio" name="encontradosperdidos" value=2 >Perdidos</label>
 			</div>
+			<div class="col">
+				<div class="pull-right" style="margin-right: 50px;">
+					<div id="cantidad-x-paginas-dd" class="dropdown col-md-5  pull-left" >
+	                    <a class="btn btn-default dropdown-toggle mediumFont" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	                        <span id="cantidad-x-paginas-selected" data-val="10">10</span>
+	                        <span class="caret"></span>
+	                    </a>
+	                    <ul id="cantidad-x-paginas" class="dropdown-menu">
+	                    	<li data-id="1" title="10"><a>10</a></li>
+	                    	<li data-id="2" title="20"><a>20</a></li>
+	                    	<li data-id="3" title="50"><a>50</a></li>
+	                    	<li data-id="Todas" title="Todas"><a>Todas</a></li>
+	                    </ul>
+                	</div>
+				</div>
+			</div>
 		</div>
-		<div id="container-publicaciones" class="row">
-			{include file='publicacion/publicaciones.tpl'}
-		</div>
-		<div class="row">
-			{include file='paginacion.tpl'}
-		</div>
+		{include file='publicacion/publicacionesconpaginado.tpl'}
 	</div>
 </div>
 	{include file='footer.tpl'}

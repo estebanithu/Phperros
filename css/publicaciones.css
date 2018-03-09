@@ -1,12 +1,14 @@
+li{
+	cursor:pointer;
+}
 #container-principal{
 	padding-top:20px;
 	min-width: 100%;
 	min-height: 500px;
-	background-color: green;
 }
 
 #container-filtros{
-	background-color: red
+
 }
 .filtros h3, .filtros ul li{
 	cursor:pointer;
@@ -17,5 +19,8 @@
 }
 
 #container-publicaciones{
-	background-color: orange
+}
+
+#cantidad-x-paginas li{
+	text-align:center;
 }

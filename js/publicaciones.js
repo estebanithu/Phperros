@@ -1,10 +1,15 @@
 
 _pub={};
 _pub.g={};//variables globales
+_pub.ctes={};//constantes
 _pub.f={};//funciones
 _pub.faux={};//funciones auxiliares
 _pub.servcom={};//comunicaciones con el servidor
 _pub.servcom.f={};
+
+_pub.ctes.Todas="Todas";
+
+_pub.g.ultimaseleccioncantidadpaginas=10;
 
 _pub.g.filtrosaplicados = {
 	"BUSQUEDA": "",
@@ -13,7 +18,14 @@ _pub.g.filtrosaplicados = {
     "RAZA": [],
     "BARRIO": [],
     "PAGE":0,
-    "CANT":10
+    "CANT":_pub.g.ultimaseleccioncantidadpaginas
+}
+
+_pub.g.cantidadporpagina = {
+	"1": 10,
+	"2": 20,
+    "3": 50,
+    "Todas": _pub.ctes.Todas// no molesta hacerlo asi
 }
 _pub.g.especiesseleccionadas=[];
 _pub.g.razasseleccionadasporespecie={};
@@ -60,6 +72,18 @@ _pub.f.initialize = function(){
 	$(document).on("keyup","#search-input",_pub.f.filtrar);
 	$(document).on("change","input[name=encontradosperdidos]",_pub.f.filtrar);
 	$(document).on("click",".pagination li.page-number",function(){_pub.f.aplicarPaginado($(this))});
+	$(document).on("click", "#cantidad-x-paginas li", function () {
+        
+        var id = $(this).data("id");
+        var value = _pub.g.cantidadporpagina[id];
+	    $("#cantidad-x-paginas-selected").html(value);
+	    if(id==_pub.ctes.Todas)
+	    	value="10000000000000000"//lo hago asi, no molesta
+	    $("#cantidad-x-paginas-selected").data("val", value);
+
+	    _pub.f.filtrar();
+
+    });
 
 
 	var buscador = $("#form_busqueda").html();
@@ -188,11 +212,22 @@ _pub.f.filtrar = function(){
 	_pub.g.filtrosaplicados["BARRIO"]=_pub.g.barriosseleccionados;
 	_pub.g.filtrosaplicados["BUSQUEDA"]=$("#search-input").val();
 	_pub.g.filtrosaplicados["ENCONTRADOPERDIDO"]=$('input[name=encontradosperdidos]:checked').val();
-	_pub.g.filtrosaplicados["PAGE"]=parseInt($(".pagination li.page-number.active span").html())-1;
+
+
+	var nuevaseleccioncantidadpaginas=$("#cantidad-x-paginas-selected").data("val");
+	var pagina=parseInt($(".pagination li.page-number.active span").html())-1;
+
+	if(_pub.g.ultimaseleccioncantidadpaginas!=nuevaseleccioncantidadpaginas)
+		pagina=0;
+	_pub.g.ultimaseleccioncantidadpaginas=pagina;
+	
+	_pub.g.filtrosaplicados["PAGE"]=pagina;
+	_pub.g.filtrosaplicados["CANT"]=nuevaseleccioncantidadpaginas
+
 	_pub.servcom.f.realizarBusquedaConFiltros(_pub.g.filtrosaplicados,_pub.f.busquedaConFiltrosCompletada);
 }
 
 _pub.f.busquedaConFiltrosCompletada = function(publicaciones){
-		var divpublicaciones = $("#container-publicaciones");
+		var divpublicaciones = $("#container-publicaciones-paginado");
 		divpublicaciones.html(publicaciones)
 }
