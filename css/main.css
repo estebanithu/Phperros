@@ -15,3 +15,7 @@ ul{
 .oculto{
 	display:none;
 }
+.obligatorio:after{
+	content:" *";
+	color:red;
+}

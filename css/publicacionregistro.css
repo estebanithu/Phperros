@@ -1,0 +1,42 @@
+#container-principal{
+	padding:50px;
+	min-height: 400px;
+	background-color: 	#ddd;
+}
+#container-error{
+	position:fixed;
+	z-index:10;
+}
+#close-error{
+	position: absolute;
+    right: 0;
+    margin-right: 15;
+    cursor: pointer;
+}
+#form-registro{
+		width:100%;
+}
+#container-form-fields{
+	margin:25px auto 25px auto !important;
+	max-width: 500px;
+	background-color: #f3f3f3;
+	border-radius: 5px;
+	padding:10px;
+}
+#btn-registrar{
+	margin:25px auto 25px auto !important;
+	max-width: 	300px
+}
+
+@media (max-width:500px){
+
+	#container-principal{
+		background-color: 	#f3f3f3;
+	}
+	#container-form-fields{
+		padding:0px;
+		background-color: 	transparent;
+	}
+
+
+}	

@@ -67,6 +67,24 @@
 			echo $this->miSmarty->display('publicacion/publicacionesconpaginado.tpl');
 		}
 
+		public function registro(){
+
+			if($_POST){
+
+			}
+			else{
+				$especies = $this->especiesModel->obtenerEspecies();
+				$razas = $this->razasModel->obtenerRazas();
+				$barrios = $this->barriosModel->obtenerBarrios();
+				$this->miSmarty->assign('especies',$especies);
+				$this->miSmarty->assign('razas',$razas);
+				$this->miSmarty->assign('barrios',$barrios);
+				$this->miSmarty->display('publicacion/publicacionregistro.tpl');
+			}
+
+				
+		}
+
 		private function obtenerFiltro($dic){
 
 			$filtro = new PublicacionFiltro();
@@ -95,5 +113,6 @@
 			}
 			return $filtro;
 		}
+
 
 	}
