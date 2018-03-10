@@ -13,6 +13,9 @@
     margin-right: 15;
     cursor: pointer;
 }
+.campo-error{
+	border-color:#dc7d7d;
+}
 #form-registro{
 		width:100%;
 }

@@ -29,19 +29,46 @@ _pubreg.f.registrarPublicacion = function(){
 _pubreg.f.validarForm = function(){
 
 	var error="";
+	$(".campo-error").removeClass("campo-error")
 
-	if($("#titulo").val().trim()=="")
+	var titulofield=$("#titulo");
+	var descripcionfield=$("#descripcion");
+	var tipofield=$("#select-tipo");
+	var especiefield=$("#select-especie");
+	var razafield=$("#select-raza");
+	var barriofield=$("#select-barrio");
+
+	var camposconerror=[];
+
+	if(titulofield.val().trim()==""){
 		error+="Ingrese titulo<br>";
-	if($("#descripcion").val().trim()=="")
+		camposconerror.push(titulofield)
+	}
+
+	if(descripcionfield.val().trim()==""){
 		error+="Ingrese descripcion<br>";
-	if($("#select-tipo").val()=="-1")
+		camposconerror.push(descripcionfield)
+	}
+	if(tipofield.val()=="-1"){
 		error+="Seleccione tipo<br>";
-	if($("#select-especie").val()=="-1")
+		camposconerror.push(tipofield)
+	}
+	if(especiefield.val()=="-1"){
 		error+="Seleccione especie<br>";
-	if($("#select-raza").val()=="-1")
+		camposconerror.push(especiefield)
+	}
+	if(razafield.val()=="-1"){
 		error+="Seleccione raza<br>";
-	if($("#select-barrio").val()=="-1")
+		camposconerror.push(razafield)
+	}
+	if(barriofield.val()=="-1"){
 		error+="Seleccione barrio<br>";
+		camposconerror.push(barriofield)
+	}
+
+	$.each(camposconerror,function(i,campo){
+		campo.addClass("campo-error")
+	})
 
 	return error;
 }
