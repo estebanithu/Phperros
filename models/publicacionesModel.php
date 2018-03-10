@@ -2,6 +2,17 @@
 
 	class PublicacionesModel extends baseModel{
 
+				public function cerrarPublicacion($idPublicacion,$exito){
+			$cn = $this->getConexion();
+			return $cn->consulta(
+				"UPDATE preguntas SET exitoso=:respuesta WHERE id=:idPublicacion",
+				array(
+					array("exitoso", $exito, 'int'),
+					array("idPublicacion", $idPublicacion, 'int')
+				)
+			);
+		}
+
 		public function obtenerPublicacionesHome() {
 		    $cn = $this->getConexion();
 		    $cn->consulta("SELECT * from publicaciones WHERE abierto = 1 ORDER BY id LIMIT 10");
@@ -77,15 +88,13 @@
 
 		public function responderPregunta($idPregunta,$respuesta){
 			$cn = $this->getConexion();
-			$cn->consulta(
+			return $cn->consulta(
 				"UPDATE preguntas SET respuesta=:respuesta WHERE id=:idPregunta",
 				array(
 					array("idPregunta", $idPregunta, 'int'),
 					array("respuesta", $respuesta, 'string')
 				)
 			);
-
-			return !is_null($cn->ultimoIdInsert()); 
 		}
 
 	}

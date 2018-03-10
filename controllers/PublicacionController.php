@@ -79,5 +79,27 @@
 			return $ret;
 		}
 
+		public function cerrarPublicacion(){
+			if(isset($_POST['idPublicacion']) && isset($_POST['exito'])){
+				$idPublicacion = $_POST['idPublicacion'];
+				$exito = $_POST['exito'];
+				if($this->cierraUsuarioCorrespondiente($idPublicacion)){
+					$aa = $this->publicacionModel->cerrarPublicacion($idPublicacion,$exito);
+					var_dump($aa);die();
+					if($this->publicacionModel->cerrarPublicacion($idPublicacion,$exito)){
+						echo '1';
+					}
+				}
+			}
+		}
+
+		private function cierraUsuarioCorrespondiente($idPublicacion){
+			if(isset($_SESSION['usuarioLogueado'])){
+				$publicacion = $this->publicacionModel->obtenerPublicacion($idPublicacion);
+				return $publicacion['usuario_id'] == $_SESSION['usuarioLogueado']['id'];
+			}
+			return FALSE;
+		}
+
 
 	}
