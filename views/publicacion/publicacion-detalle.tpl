@@ -30,6 +30,22 @@
 			<div><i class='fa fa-user'></i> {$publicacion.usr_nom}</div>
 			<div><i class='fa fa-envelope'></i> <a href='mailto:{$publicacion.usr_email}' target='_top'>{$publicacion.usr_email}</a></div>
 		</div>
+		{if $hayUsuarioLogueado}
+			{if $usuarioLogueado.id == $publicacion.usuario_id}
+			<hr>
+			<h4>Cerrar Publicación</h4>
+				<div class="input-group cerrar-publicacion">
+				  <select class="custom-select" id="inputGroupSelect04">
+				    <option selected>¿Con éxito?</option>
+				    <option value="1">Sí</option>
+				    <option value="0">No</option>
+				  </select>
+				  <div class="input-group-append">
+				    <button class="btn btn-danger" type="button"><i class="fa fa-key"></i> Cerrar publicación</button>
+				  </div>
+				</div>
+			{/if}
+		{/if}
 		</div>
 	</section>
 	<hr>
