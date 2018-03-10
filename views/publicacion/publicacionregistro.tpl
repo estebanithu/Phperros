@@ -1,4 +1,14 @@
 {include file='header.tpl'}
+<!--FILE UPLOAD-->
+<link rel="stylesheet" href="vendor/fileupload/css/blueimp-gallery.min.css">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="vendor/fileupload/css/jquery.fileupload.css">
+<link rel="stylesheet" href="vendor/fileupload/css/jquery.fileupload-ui.css">
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript><link rel="stylesheet" href="vendor/fileupload/css/jquery.fileupload-noscript.css"></noscript>
+<noscript><link rel="stylesheet" href="vendor/fileupload/css/jquery.fileupload-ui-noscript.css"></noscript>
+<!--FILE UPLOAD-->
+
 <link rel="stylesheet" type="text/css" href="css/publicacionregistro.css">
 <script type="text/javascript" src="js/publicacionregistro.js"></script>
 <body>
@@ -58,7 +68,118 @@
 			  </div>
 			  <hr>
 			  <input id="btn-registrar" class="btn btn-block btn-lg btn-success submit" type="button" value="Registrar"><br>
+			  		<form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+			<span class="btn btn-success fileinput-button">
+	            <i class="glyphicon glyphicon-plus"></i>
+	            <span>Add files...</span>
+	            <input type="file" name="files[]" multiple>
+	         </span>
+	         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+	    </form>
 		</div>
 	</div>
 	{include file='footer.tpl'}
 </body>
+{literal}
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+	{% for (var i=0, file; file=o.files[i]; i++) { %}
+	    <tr class="template-upload fade">
+	        <td>
+	            <span class="preview"></span>
+	        </td>
+	        <td>
+	            <p class="name">{%=file.name%}</p>
+	            <strong class="error text-danger"></strong>
+	        </td>
+	        <td>
+	            <p class="size">Processing...</p>
+	            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+	        </td>
+	        <td>
+	            {% if (!i && !o.options.autoUpload) { %}
+	                <button class="btn btn-primary start" disabled>
+	                    <i class="glyphicon glyphicon-upload"></i>
+	                    <span>Start</span>
+	                </button>
+	            {% } %}
+	            {% if (!i) { %}
+	                <button class="btn btn-warning cancel">
+	                    <i class="glyphicon glyphicon-ban-circle"></i>
+	                    <span>Cancel</span>
+	                </button>
+	            {% } %}
+	        </td>
+	    </tr>
+	{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+{/literal}
+<!--FILE UPLOAD-->
+<!-- ya se incluyo <script src="vendor/fileupload/js/jquery.min.js"></script>-->
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="vendor/fileupload/js/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="vendor/fileupload/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="vendor/fileupload/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="vendor/fileupload/js/canvas-to-blob.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="vendor/fileupload/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="vendor/fileupload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="vendor/fileupload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="vendor/fileupload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="vendor/fileupload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="vendor/fileupload/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="vendor/fileupload/js/jquery.fileupload-ui.js"></script>
+<script src="vendor/fileupload/js/main.js"></script>
+<!--FILE UPLOAD-->
