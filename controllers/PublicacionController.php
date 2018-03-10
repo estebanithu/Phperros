@@ -36,4 +36,23 @@
 			return $retorno;
 		}
 
+		public function realizarPregunta(){
+			if(isset($_POST['pregunta']) && isset($_POST['idPublicacion']) && isset($_SESSION['usuarioLogueado'])){
+				$idPublicacion = $_POST['idPublicacion'];
+				$pregunta = $_POST['pregunta'];
+				$idUsuario = $_SESSION['usuarioLogueado']['id'];
+				if($this->publicacionModel->insertarPregunta($idPublicacion,$pregunta,$idUsuario)){
+					echo $this->armarHtmlPregunta($pregunta);
+				}
+			}
+		}
+
+		private function armarHtmlPregunta($pregunta){
+			$ret = '<li class="pregunta-respuesta" style="list-style:  none; border-bottom: 1px solid rgba(0,0,0,.1); padding-bottom: 10px;padding-top: 10px;">
+					<article class="pregunta" style="margin-bottom: 5px;"><i class="fa fa-comment"></i> '.$pregunta.'</article>
+				</li>';
+			return $ret;
+		}
+
+
 	}

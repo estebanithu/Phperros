@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $(".owl-carousel").owlCarousel({
+  $('.owl-carousel').owlCarousel({
   	responsive:{
   	    0:{
   	        items:1,
@@ -14,4 +14,22 @@ $(document).ready(function(){
   	}
 
   });
+  $('#btn-preguntar').on('click', realizarPregunta);
 });
+
+function realizarPregunta(){
+	let pregunta = $.trim($('#txt-pregunta').val());
+	let idPublicacion = $(this).attr('data-id-publicacion');
+	if(pregunta.length > 0){
+		let parametros = {pregunta : pregunta, idPublicacion: idPublicacion};
+		$.ajax({
+			url: 'Publicacion/realizarPregunta',
+			data: parametros,
+			type: 'POST',
+			success: function(result){
+				$('#txt-pregunta').val('');
+		   		$('.preguntas').append(result);
+			}
+		});
+	}
+}

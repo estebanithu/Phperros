@@ -17,4 +17,6 @@
     <link rel="stylesheet" type="text/css" href="css/owlcarousel/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="css/owlcarousel/owl.theme.default.min.css">
 
+    <link href="fonts/fonts-awesome/css/font-awesome.min.css" rel="stylesheet">
+
   </head>
