@@ -1,0 +1,17 @@
+/*bootstrap redefine*/
+.row{
+	margin:0px;
+}
+.bg-dark {
+    background-color: #212529!important;
+}
+/*bootstrap redefine*/
+ul{
+	list-style-type: none;
+}
+.radio{
+	margin-right: 10px;
+}
+.oculto{
+	display:none;
+}

@@ -1,0 +1,55 @@
+li{
+	cursor:pointer;
+}
+#container-principal{
+	min-width: 100%;
+	min-height: 500px;
+	background-color: lavender
+}
+
+#container-filtros{
+	padding:10px 0px;
+	background-color:lightslategray;
+	color:white;
+}
+.filtros h3{
+	color:whitesmoke;
+	background-color: #343a40;
+	text-align: center;
+	padding:10px;
+}
+.filtros ul{
+	padding:0px;
+}
+.filtros ul li{
+	color:whitesmoke;
+	text-align: center;
+	padding:5px;
+}
+.filtros h3, .filtros ul li{
+	cursor:pointer;
+}
+
+.filtros li:hover{
+	font-weight:bold;
+	font-size:17;
+}
+
+.filtro-seleccionado{
+	font-weight:bold;
+	font-size:17;
+}
+.filtro-seleccionado:before{
+	content:'* ';
+}
+
+#container-central{
+	padding-top:20px;
+}
+
+#cantidad-x-paginas li{
+	text-align:center;
+}
+.pagination{
+	margin:10px;
+}
