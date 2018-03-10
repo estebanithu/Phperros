@@ -30,7 +30,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="col-md-9 col-sm-9 col-xs-12">
+	<div id="container-central" class="col-md-9 col-sm-9 col-xs-12">
 		<div class="row">
 			 <div class="radio">
   				<label><input type="radio" name="encontradosperdidos" value=0 checked>Todos</label>

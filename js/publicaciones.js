@@ -70,6 +70,23 @@ _pub.f.initialize = function(){
 	$(document).on("keyup","#search-input",_pub.f.filtrar);
 	$(document).on("change","input[name=encontradosperdidos]",_pub.f.filtrar);
 	$(document).on("click",".pagination li.page-number",function(){_pub.f.aplicarPaginado($(this))});
+	$(document).on("click", ".page-back,.page-forward", function () {
+
+		debugger;
+		var pageselected = parseInt($(".pagination li.page-number.active span").html());
+		var indextoselect = -1;
+		$(".pagination li.page-number").removeClass("active");
+		if($(this).hasClass("page-back")){
+			indextoselect=pageselected-2;
+			$($(".pagination li.page-number")[indextoselect]).addClass("active")
+		}
+		else{
+			indextoselect=pageselected;
+			$($(".pagination li.page-number")[indextoselect]).addClass("active")
+		}
+
+		_pub.f.filtrar(false);
+	});
 	$(document).on("click", "#cantidad-x-paginas li", function () {
         
         var id = $(this).data("id");

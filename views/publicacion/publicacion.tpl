@@ -7,7 +7,7 @@
         {/if}
   </h5>
   <div class="card h-100">
-    <a target="_blank" href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+    <a target="_blank" href="#"><img class="card-img-top" src="https://www.infobae.com/new-resizer/WCjc7Cx5cJjAqLCcf7gHcDelf-k=/600x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2017/04/06155038/perro-beso-1024x576.jpg" alt=""></a>
     <div class="card-body">
       <h4 class="card-title">
         <a target="_blank" href="#">{$pub.titulo}</a>
