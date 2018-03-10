@@ -15,6 +15,7 @@ $(document).ready(function(){
 
   });
   $('#btn-preguntar').on('click', realizarPregunta);
+  $('.btn-responder').on('click', responderPregunta);
 });
 
 function realizarPregunta(){
@@ -29,6 +30,25 @@ function realizarPregunta(){
 			success: function(result){
 				$('#txt-pregunta').val('');
 		   		$('.preguntas').append(result);
+			}
+		});
+	}
+}
+
+function responderPregunta(){
+	let row = $(this).parent().parent();
+	let respuesta = $.trim(row.find('textarea').val());
+	let idPregunta = $(this).attr('data-id-pregunta');
+	let li = $(this).closest('li[class^="pregunta-respuesta"]');
+	if(respuesta.length > 0){
+		let parametros = {respuesta : respuesta, idPregunta: idPregunta};
+		$.ajax({
+			url: 'Publicacion/responderPregunta',
+			data: parametros,
+			type: 'POST',
+			success: function(result){
+				row.remove();
+		   		li.append(result);
 			}
 		});
 	}

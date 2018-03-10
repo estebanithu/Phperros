@@ -26,12 +26,29 @@
 			return $cn->siguienteRegistro();
 		}
 
+		public function obtenerPregunta($idPregunta){
+			$cn = $this->getConexion();
+
+			$cn->consulta(
+				   "SELECT pr.*, u.id as usuario_respuesta
+					FROM preguntas pr
+					JOIN publicaciones p ON pr.id_publicacion = p.id
+					JOIN usuarios u ON p.usuario_id = u.id
+					WHERE pr.id = :id",
+				array(
+					array("id", $idPregunta, 'int')
+				)
+			);
+
+			return $cn->siguienteRegistro();
+		}
+
 
 		public function obtenerPreguntas($idPublicacion){
 			$cn = $this->getConexion();
 
 			$cn->consulta(
-				   "SELECT * 
+				   "SELECT p.*, u.nombre as nombre_usuario 
 					FROM  preguntas p 
 					JOIN usuarios u ON p.usuario_id = u.id
 					WHERE  id_publicacion = :idPub",
@@ -51,6 +68,20 @@
 					array("idPublicacion", $idPublicacion, 'int'),
 					array("pregunta", $pregunta, 'string'),
 					array("idUsuario", $idUsuario, 'int')
+				)
+			);
+
+			return !is_null($cn->ultimoIdInsert()); 
+		}
+
+
+		public function responderPregunta($idPregunta,$respuesta){
+			$cn = $this->getConexion();
+			$cn->consulta(
+				"UPDATE preguntas SET respuesta=:respuesta WHERE id=:idPregunta",
+				array(
+					array("idPregunta", $idPregunta, 'int'),
+					array("respuesta", $respuesta, 'string')
 				)
 			);
 

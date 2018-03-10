@@ -54,5 +54,30 @@
 			return $ret;
 		}
 
+		public function responderPregunta(){
+			if(isset($_POST['respuesta']) && isset($_POST['idPregunta'])){
+				$respuesta = $_POST['respuesta'];
+				$idPregunta = $_POST['idPregunta'];
+				if($this->respondeUsuarioCorrespondiente($idPregunta)){
+					if($this->publicacionModel->responderPregunta($idPregunta,$respuesta)){
+						echo $this->armarHtmlRespuesta($respuesta);
+					}
+				}
+			}
+		}
+
+		private function respondeUsuarioCorrespondiente($idPregunta){
+			if(isset($_SESSION['usuarioLogueado'])){
+				$pregunta = $this->publicacionModel->obtenerPregunta($idPregunta);
+				return $pregunta['usuario_respuesta'] == $_SESSION['usuarioLogueado']['id'];
+			}
+			return FALSE;
+		}
+
+		private function armarHtmlRespuesta($respuesta){
+			$ret = '<article class="respuesta" style="margin-left: 15px;"><i style="  -webkit-transform:rotateY(180deg);  -moz-transform:rotateY(180deg);  -o-transform:rotateY(180deg);  -ms-transform:rotateY(180deg);" class="fa fa-comment"></i> '.$respuesta.'</article>';
+			return $ret;
+		}
+
 
 	}
