@@ -80,17 +80,22 @@
 		}
 
 		public function cerrarPublicacion(){
+			$retorno = array();
+			$retorno['error'] = 1;
 			if(isset($_POST['idPublicacion']) && isset($_POST['exito'])){
 				$idPublicacion = $_POST['idPublicacion'];
 				$exito = $_POST['exito'];
 				if($this->cierraUsuarioCorrespondiente($idPublicacion)){
-					$aa = $this->publicacionModel->cerrarPublicacion($idPublicacion,$exito);
-					var_dump($aa);die();
 					if($this->publicacionModel->cerrarPublicacion($idPublicacion,$exito)){
-						echo '1';
+						$retorno['error'] = 0;
+						$retorno['mensaje'] = 'La publicacion se ha cerrado correctamente';
 					}
 				}
 			}
+			if($retorno['error'] == 1){
+				$retorno['mensaje'] = 'Error al cerrar la publicación';
+			}
+			echo json_encode($retorno);
 		}
 
 		private function cierraUsuarioCorrespondiente($idPublicacion){

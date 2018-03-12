@@ -37,6 +37,10 @@
 	margin-top: 15px;
 }
 
+.center{
+	text-align: center;
+}
+
 #contenedor-publicacion{
 	margin-top: 20px;
 }
@@ -51,5 +55,9 @@
 
 #btn-preguntar{
 	margin-top: 3%;
+}
+
+#cerrar-publicacion-respuesta{
+	margin-bottom: 10px;
 }
 

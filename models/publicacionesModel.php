@@ -2,17 +2,6 @@
 
 	class PublicacionesModel extends baseModel{
 
-				public function cerrarPublicacion($idPublicacion,$exito){
-			$cn = $this->getConexion();
-			return $cn->consulta(
-				"UPDATE preguntas SET exitoso=:respuesta WHERE id=:idPublicacion",
-				array(
-					array("exitoso", $exito, 'int'),
-					array("idPublicacion", $idPublicacion, 'int')
-				)
-			);
-		}
-
 		public function obtenerPublicacionesHome() {
 		    $cn = $this->getConexion();
 		    $cn->consulta("SELECT * from publicaciones WHERE abierto = 1 ORDER BY id LIMIT 10");
@@ -23,14 +12,14 @@
 			$cn = $this->getConexion();
 
 			$cn->consulta(
-				   "SELECT p.*,r.nombre as raza, e.nombre as especie, u.nombre as usr_nom, u.email as usr_email
+				   "SELECT p.*,IF(p.abierto = 1,1,0) as abierta, r.nombre as raza, e.nombre as especie, u.nombre as usr_nom, u.email as usr_email
 					FROM publicaciones p  
 					JOIN especies e ON p.especie_id = e.id 
 					JOIN razas r ON p.raza_id = r.id 
 					JOIN usuarios u ON p.usuario_id = u.id 
 					WHERE p.id = :id",
 				array(
-					array("id", $id, 'int')
+					array("id", intval($id), 'int')
 				)
 			);
 
@@ -47,7 +36,7 @@
 					JOIN usuarios u ON p.usuario_id = u.id
 					WHERE pr.id = :id",
 				array(
-					array("id", $idPregunta, 'int')
+					array("id", intval($idPregunta), 'int')
 				)
 			);
 
@@ -64,7 +53,7 @@
 					JOIN usuarios u ON p.usuario_id = u.id
 					WHERE  id_publicacion = :idPub",
 				array(
-					array("idPub", $idPublicacion, 'int')
+					array("idPub", intval($idPublicacion), 'int')
 				)
 			);
 
@@ -76,9 +65,9 @@
 			$cn->consulta(
 				"INSERT INTO preguntas(id_publicacion, texto, usuario_id) VALUES (:idPublicacion,:pregunta,:idUsuario)",
 				array(
-					array("idPublicacion", $idPublicacion, 'int'),
+					array("idPublicacion", intval($idPublicacion), 'int'),
 					array("pregunta", $pregunta, 'string'),
-					array("idUsuario", $idUsuario, 'int')
+					array("idUsuario", intval($idUsuario), 'int')
 				)
 			);
 
@@ -91,8 +80,20 @@
 			return $cn->consulta(
 				"UPDATE preguntas SET respuesta=:respuesta WHERE id=:idPregunta",
 				array(
-					array("idPregunta", $idPregunta, 'int'),
+					array("idPregunta", intval($idPregunta), 'int'),
 					array("respuesta", $respuesta, 'string')
+				)
+			);
+		}
+
+
+		public function cerrarPublicacion($idPublicacion,$exito){
+			$cn = $this->getConexion();
+			return $cn->consulta(
+				"UPDATE publicaciones SET exitoso = :exito, abierto = 0 WHERE id = :idPublicacion",
+				array(
+					array("exito", intval($exito), 'int'),
+					array("idPublicacion", intval($idPublicacion), 'int')
 				)
 			);
 		}

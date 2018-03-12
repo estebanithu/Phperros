@@ -17,7 +17,7 @@ $(document).ready(function(){
   $('#btn-preguntar').on('click', realizarPregunta);
   $('.btn-responder').on('click', responderPregunta);
   $('#btn-cerrar-publicacion').on('click', cerrarPublicacion);
-  
+
 });
 
 function realizarPregunta(){
@@ -66,7 +66,14 @@ function cerrarPublicacion(){
 			data: parametros,
 			type: 'POST',
 			success: function(result){
-
+				let clase = 'alert-danger';
+				let respuesta = $.parseJSON(result);
+				if(!respuesta.error){
+					clase = 'alert-success';
+				}
+				let alert = `<div class="alert ${clase} alert-chico" role="alert">${respuesta.mensaje}</div>`;
+				$('#cerrar-publicacion-respuesta').empty();
+				$('#cerrar-publicacion-respuesta').append(alert);
 			}
 		});
 	}

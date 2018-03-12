@@ -4,6 +4,11 @@
 <script type='text/javascript' src='js/publicacion-detalle.js'></script>
 <link rel='stylesheet' type='text/css' href='css/publicacion-detalle.css'>
 {include file='navBar.tpl'}
+{if $publicacion.abierta == 0}
+	<div class="alert alert-warning center">
+	  <strong>Atención!</strong> Esta publicación ya ha sido cerrada.
+	</div>
+{/if}
 <div id='contenedor-publicacion' class='container'>
 	<h1>{$publicacion.titulo}</h1>
 	<div>{$publicacion.especie} > {$publicacion.raza}</div>	
@@ -30,22 +35,7 @@
 			<div><i class='fa fa-user'></i> {$publicacion.usr_nom}</div>
 			<div><i class='fa fa-envelope'></i> <a href='mailto:{$publicacion.usr_email}' target='_top'>{$publicacion.usr_email}</a></div>
 		</div>
-		{if $hayUsuarioLogueado}
-			{if $usuarioLogueado.id == $publicacion.usuario_id}
-			<hr>
-			<h4>Cerrar Publicación</h4>
-				<div class="input-group cerrar-publicacion">
-				  <select class="custom-select" id="select-publicacion-exito">
-				    <option selected>¿Con éxito?</option>
-				    <option value="1">Sí</option>
-				    <option value="0">No</option>
-				  </select>
-				  <div class="input-group-append">
-				    <button class="btn btn-danger" id='btn-cerrar-publicacion' type="button" data-id-publicacion="{$publicacion.id}"><i class="fa fa-key"></i> Cerrar publicación</button>
-				  </div>
-				</div>
-			{/if}
-		{/if}
+			{include file='publicacion/cerrar-publicacion.tpl'}	
 		</div>
 	</section>
 	<hr>
