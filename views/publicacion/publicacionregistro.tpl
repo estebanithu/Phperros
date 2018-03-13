@@ -11,6 +11,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/publicacionregistro.css">
 <script type="text/javascript" src="js/publicacionregistro.js"></script>
+
 <body>
 	{include file='navBar.tpl'}
 	<div id="container-principal" class="row">
@@ -50,7 +51,7 @@
 			  <div class="form-group col-6">
 			    <label for="select-raza" class="obligatorio">Raza</label>
 			    <select class="form-control" id="select-raza">
-			    	<option value="-1">---</option>
+			    	<option value="-1" data-especieid="-1">---</option>
 			     	{foreach from=$razas item=raz}
 						<option value="{$raz.id}" data-especieid="{$raz.especie_id}">{$raz.nombre}</option>
 					{/foreach}
@@ -67,14 +68,18 @@
 			  </div>
 			  </div>
 			  <hr>
-			  <input id="btn-registrar" class="btn btn-block btn-lg btn-success submit" type="button" value="Registrar"><br>
-			  		<form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-			<span class="btn btn-success fileinput-button">
-	            <i class="glyphicon glyphicon-plus"></i>
-	            <span>Add files...</span>
-	            <input type="file" name="files[]" multiple>
-	         </span>
-	         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+			  <form id="fileupload" action="Publicacion/registro" method="POST" enctype="multipart/form-data">
+				<span class="btn btn-success fileinput-button">
+		            <i class="glyphicon glyphicon-plus"></i>
+		            <span>Agregue imagenes...</span>
+		            <input type="file" name="files[]" multiple>
+	         	</span>
+	         <table id="tabla-imagenes" role="presentation" class="table table-striped">
+	         		<tbody class="files">
+	         			
+	         		</tbody>
+	         </table>
+	         <input id="btn-registrar" class="btn btn-block btn-lg btn-success submit" type="button" value="Registrar"><br>
 	    </form>
 		</div>
 	</div>
@@ -97,12 +102,12 @@
 	            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
 	        </td>
 	        <td>
-	            {% if (!i && !o.options.autoUpload) { %}
+	            <!--{% if (!i && !o.options.autoUpload) { %}
 	                <button class="btn btn-primary start" disabled>
 	                    <i class="glyphicon glyphicon-upload"></i>
 	                    <span>Start</span>
 	                </button>
-	            {% } %}
+	            {% } %}-->
 	            {% if (!i) { %}
 	                <button class="btn btn-warning cancel">
 	                    <i class="glyphicon glyphicon-ban-circle"></i>

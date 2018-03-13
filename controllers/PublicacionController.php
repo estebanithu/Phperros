@@ -70,7 +70,7 @@
 		public function registro(){
 
 			if($_POST){
-
+				var_dump("sube que sube");die();
 			}
 			else{
 				$especies = $this->especiesModel->obtenerEspecies();
