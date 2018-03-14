@@ -16,9 +16,13 @@
 	<div class='row'>
 		<div class='col-xs-12 col-sm-6 col-lg-8' id='galeria'>
 			<div class='owl-carousel owl-theme'>
-				{foreach from=$imagenes item=img}
-					<div><img class='img-responsive' src='{$img}'></div>
-				{/foreach}
+				{if count($imagenes) > 0}
+					{foreach from=$imagenes item=img}
+						<div><img class='img-responsive' src='{$img}'></div>
+					{/foreach}
+				{else}
+					<div><img src="uploads/defecto.png"></div>
+				{/if}
 			</div>
 		</div>
 		<div id='descripcion' class='col-xs-6 col-lg-4'>
