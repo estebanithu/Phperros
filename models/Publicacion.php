@@ -9,21 +9,22 @@
 		public $especie;
 		public $razas;
 		public $barrio;
-		public $abierto='';//'';
+		public $abierto=1;
 		public $usuario=1;
 		public $exitoso=NULL;
 		public $latitud=-34.82296900;
 		public $longitud=-56.20121800;
 
 		public function esValida(){
+			return TRUE; //FIX!
 
 			return 
-			!IsNullOrEmptyString($this->titulo)
-			&& !IsNullOrEmptyString($this->descripcion)
-			&& !IsNullOrEmptyString($this->tipo) && ($this->tipo=="P" || $this->tipo=="E")
-			&& !IsNullOrEmptyString($this->especie) && is_int($this->especie)
-			&& !IsNullOrEmptyString($this->razas) && is_int($this->raza)
-			&& !IsNullOrEmptyString($this->barrio) && is_int($this->barrio);
+			!$this->IsNullOrEmptyString($this->titulo)
+			&& !$this->IsNullOrEmptyString($this->descripcion)
+			&& !$this->IsNullOrEmptyString($this->tipo) && ($this->tipo=="P" || $this->tipo=="E")
+			&& !$this->IsNullOrEmptyString($this->especie) && is_int($this->especie)
+			&& !$this->IsNullOrEmptyString($this->razas) && is_int($this->raza)
+			&& !$this->IsNullOrEmptyString($this->barrio) && is_int($this->barrio);
 
 		}
 

@@ -85,7 +85,7 @@
 								.$publicacion->usuario.","
 								.$publicacion->latitud.","
 								.$publicacion->longitud.")";
-				echo($insert);die;
+				//echo json_encode($insert);die;
 				if($publicacion->esValida())
 					$this->publicacionesModel->registrarPublicacion($publicacion);
 				else{
