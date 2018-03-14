@@ -9,6 +9,7 @@
 			require_once 'models/EspecieModel.php';
 			require_once 'models/BarrioModel.php';
 			require_once 'models/PublicacionFiltro.php';
+			require_once 'models/Publicacion.php';
 			$this->publicacionesModel = new PublicacionesModel();
 			$this->especiesModel = new EspecieModel();
 			$this->razasModel = new RazaModel();
@@ -68,9 +69,29 @@
 		}
 
 		public function registro(){
-
 			if($_POST){
-				var_dump("sube que sube");die();
+				$publicacion = $this->obtenerPublicacion($_POST);
+				$insert = "INSERT INTO 'publicaciones' ('titulo', 'descripcion', 'tipo',".
+							"'especie_id', 'raza_id', 'barrio_id',".
+							"'abierto', 'usuario_id','latitud',".
+							"'longitud')".
+							"VALUES ('".$publicacion->titulo."',"
+						 		."'".$publicacion->descripcion."',"
+								."'".$publicacion->tipo."',"
+								.$publicacion->especie.","
+								.$publicacion->raza.","
+								.$publicacion->barrio.","
+								."'".$publicacion->abierto."',"
+								.$publicacion->usuario.","
+								.$publicacion->latitud.","
+								.$publicacion->longitud.")";
+				echo($insert);die;
+				if($publicacion->esValida())
+					$this->publicacionesModel->registrarPublicacion($publicacion);
+				else{
+
+				}
+
 			}
 			else{
 				$especies = $this->especiesModel->obtenerEspecies();
@@ -86,7 +107,6 @@
 		}
 
 		private function obtenerFiltro($dic){
-
 			$filtro = new PublicacionFiltro();
 			if($dic){
 				if(isset($dic['busqueda'])){
@@ -112,6 +132,32 @@
 				}
 			}
 			return $filtro;
+		}
+
+		private function obtenerPublicacion($dic){
+
+			$publicacion = new Publicacion();
+			if($dic){
+				if(isset($dic['titulo'])){
+					$publicacion->titulo=$dic['titulo'];
+				}
+				if(isset($dic['descripcion'])){
+					$publicacion->descripcion=$dic['descripcion'];
+				}
+				if(isset($dic['tipo'])){
+					$publicacion->tipo=$dic['tipo'];
+				}
+				if(isset($dic['especie'])){
+					$publicacion->especie=$dic['especie'];
+				}
+				if(isset($dic['raza'])){
+					$publicacion->raza=$dic['raza'];
+				}
+				if(isset($dic['barrio'])){
+					$publicacion->barrio=$dic['barrio'];
+				}
+			}
+			return $publicacion;
 		}
 
 

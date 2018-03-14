@@ -8,12 +8,12 @@ $(document).ready(function(){
 });
 
 _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
-
+		console.log(publicacion);
 		$.ajax({
         type: "POST",
         url: "Publicacion/registro",
         data: publicacion,
-       // contentType: "application/json; charset=utf-8",
+        //contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
             callback(response)
@@ -43,7 +43,6 @@ _pubreg.f.cambioEspecie = function(){
 	var especieid = $("#select-especie").val();
 
 	if(especieid!=-1){
-		debugger;
 		$("#select-raza option").removeClass("oculto");
 		$("#select-raza option:not(*[data-especieid='"+especieid+"']):not(*[data-especieid='-1'])").addClass("oculto")
 		$("#select-raza").val("-1")
@@ -127,9 +126,9 @@ _pubreg.f.validarForm = function(){
 		camposconerror.push(barriofield)
 	}
 
-	if(filaimagenes.length==0){
-		error+="Agregue al menos una imagen<br>";
-	}
+	//if(filaimagenes.length==0){
+	//	error+="Agregue al menos una imagen<br>";
+	//}
 
 	$.each(camposconerror,function(i,campo){
 		campo.addClass("campo-error")
@@ -138,21 +137,19 @@ _pubreg.f.validarForm = function(){
 	return error;
 }
 
-_pubreg.f.registrarPublicacionCompletado = function(){
-		alert("mando bien")
-		var canvas = $("canvas")[1];
+_pubreg.f.registrarPublicacionCompletado = function(response){
+		console.log(response)
+		/*var canvas = $("canvas")[1];
 		if (canvas.toBlob) {
 		    canvas.toBlob(
 		        function (blob) {
-		            // Do something with the blob object,
-		            // e.g. creating a multipart form for file uploads:
 		            console.log(blob)
-		            /* ... */
+
 		        }
 		        //,
 		        //'image/jpeg'
 		    );
-		}
+		}*/
 }
 
 _pubreg.f.agregarImagenAPublicacionCompletado = function(){

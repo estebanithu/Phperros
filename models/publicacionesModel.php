@@ -22,4 +22,19 @@
 		    $consultaResultado->publicaciones = $cn->restantesRegistros();
 		    return $consultaResultado;
 		}
+
+		public function registrarPublicacion($publicacion){
+			$cn = $this->getConexion();
+			$cn->consulta("INSERT INTO 'publicaciones' VALUES('".$publicacion->titulo."',"
+						 		."'".$publicacion->descripcion."',"
+								.$publicacion->tipo.","
+								.$publicacion->especie.","
+								.$publicacion->raza.","
+								.$publicacion->barrio.","
+								.$publicacion->abierto.","
+								.$publicacion->usuario.","
+								.$publicacion->exitoso.","
+								.$publicacion->latitud.","
+								.$publicacion->longitud.")");
+		}
 	}
