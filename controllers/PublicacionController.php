@@ -185,4 +185,12 @@
 			}
 			return FALSE;
 		}
+
+		public function generarPublicacionPDF($id){
+			$publicacion = (object) $this->publicacionesModel->obtenerPublicacion($id);
+			$fotosPublicacion = $this->obtenerImagenes($id);
+			require_once 'services/GeneradorPDF.php';
+			$generadorPDF = new GeneradorPDF();
+			$generadorPDF->generarPublicacionEnPDF($publicacion, $fotosPublicacion);
+		}
 }
