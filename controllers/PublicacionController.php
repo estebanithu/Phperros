@@ -71,27 +71,12 @@
 		public function registro(){
 			if($_POST){
 				$publicacion = $this->obtenerPublicacion($_POST);
-				$insert = "INSERT INTO 'publicaciones' ('titulo', 'descripcion', 'tipo',".
-							"'especie_id', 'raza_id', 'barrio_id',".
-							"'abierto', 'usuario_id','latitud',".
-							"'longitud')".
-							"VALUES ('".$publicacion->titulo."',"
-						 		."'".$publicacion->descripcion."',"
-								."'".$publicacion->tipo."',"
-								.$publicacion->especie.","
-								.$publicacion->raza.","
-								.$publicacion->barrio.","
-								."'".$publicacion->abierto."',"
-								.$publicacion->usuario.","
-								.$publicacion->latitud.","
-								.$publicacion->longitud.")";
-				//echo json_encode($insert);die;
+				//echo json_encode(array('prueba'=>$publicacion->esValida()));
 				if($publicacion->esValida())
-					$this->publicacionesModel->registrarPublicacion($publicacion);
+					echo json_encode(array('id' => $this->publicacionesModel->registrarPublicacion($publicacion)));
 				else{
-
+					echo json_encode(array('error' =>"Se produjo un error"));
 				}
-
 			}
 			else{
 				$especies = $this->especiesModel->obtenerEspecies();
