@@ -9,6 +9,7 @@ $(document).ready(function(){
 });
 
 _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
+
 		$.ajax({
         type: "POST",
         url: "Publicacion/registro",
@@ -29,7 +30,6 @@ _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
 }
 _pubreg.servcom.f.agregarImagenAPublicacion= function(idpublicacion,base64image,nombreimagen,callback){
 
-	console.log("VA A AGREGAR IMAGEN")
 	var fd = new FormData();
 	fd.append('nombreimagen', nombreimagen);
 	fd.append('imagen', base64image);
@@ -153,9 +153,9 @@ _pubreg.f.validarForm = function(){
 }
 
 _pubreg.f.registrarPublicacionCompletado = function(response){
-		console.log(response.id);
 		_pubreg.temp.idpublicacion=response.id;
-		_pubreg.temp.imagenesCanvasParaEnviar=$("canvas").toArray();
+		_pubreg.temp.imagenesCanvasParaEnviar=$("#tabla-imagenes canvas").toArray();
+		_pubreg.temp.nombresDeImagenesParaEnviar=$("#tabla-imagenes .name").toArray();
 		_pubreg.f.agregarImagenAPublicacion();
 }
 
@@ -163,6 +163,7 @@ _pubreg.f.agregarImagenAPublicacion=function(){
 
 	if(_pubreg.temp.imagenesCanvasParaEnviar.length>0){
 			var imgCanvas = _pubreg.temp.imagenesCanvasParaEnviar.shift();//remueve el primero y lo devuelve
+			var nombre = $(_pubreg.temp.nombresDeImagenesParaEnviar.shift()).html();
 			if (imgCanvas.toBlob) {
 	    		imgCanvas.toBlob(
 			        function (blob) {
@@ -171,7 +172,7 @@ _pubreg.f.agregarImagenAPublicacion=function(){
 							reader.readAsDataURL(blob); 
 							reader.onloadend = function() {
 	 							base64data = reader.result;                
-	 							_pubreg.servcom.f.agregarImagenAPublicacion(_pubreg.temp.idpublicacion,base64data,"nombreimagen",_pubreg.f.agregarImagenAPublicacionCompletado);
+	 							_pubreg.servcom.f.agregarImagenAPublicacion(_pubreg.temp.idpublicacion,base64data,nombre,_pubreg.f.agregarImagenAPublicacionCompletado);
 			        
 							}
 			        }

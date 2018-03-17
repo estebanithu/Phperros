@@ -42,7 +42,7 @@
 				)
 			);
 
-			return !is_null($cn->ultimoIdInsert()); 
+			return $cn->ultimoIdInsert(); 
 		}
 
 	}
