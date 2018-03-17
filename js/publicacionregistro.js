@@ -1,5 +1,6 @@
 _pubreg={}
 _pubreg.f={}
+_pubreg.temp={}
 _pubreg.servcom={}
 _pubreg.servcom.f={}
 
@@ -8,7 +9,6 @@ $(document).ready(function(){
 });
 
 _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
-		console.log(publicacion);
 		$.ajax({
         type: "POST",
         url: "Publicacion/registro",
@@ -27,8 +27,23 @@ _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
 	});
 
 }
-_pubreg.servcom.f.agregarImagenAPublicacion= function(idpublicacion,imagen,callback){
+_pubreg.servcom.f.agregarImagenAPublicacion= function(idpublicacion,base64image,nombreimagen,callback){
 
+	console.log("VA A AGREGAR IMAGEN")
+	var fd = new FormData();
+	fd.append('nombreimagen', nombreimagen);
+	fd.append('imagen', base64image);
+	fd.append('idpublicacion', idpublicacion);
+	$.ajax({
+	    type: 'POST',
+	    url: 'Publicacion/agregarImagen',
+	    data: fd,
+	    processData: false,
+	    contentType: false
+	}).done(function(data) {
+			console.log(data);
+	       _pubreg.f.agregarImagenAPublicacionCompletado();
+	});
 }
 
 _pubreg.f.initialize = function(){
@@ -126,9 +141,9 @@ _pubreg.f.validarForm = function(){
 		camposconerror.push(barriofield)
 	}
 
-	//if(filaimagenes.length==0){
-	//	error+="Agregue al menos una imagen<br>";
-	//}
+	if(filaimagenes.length==0){
+		error+="Agregue al menos una imagen<br>";
+	}
 
 	$.each(camposconerror,function(i,campo){
 		campo.addClass("campo-error")
@@ -138,20 +153,33 @@ _pubreg.f.validarForm = function(){
 }
 
 _pubreg.f.registrarPublicacionCompletado = function(response){
-		console.log(response)
-		/*var canvas = $("canvas")[1];
-		if (canvas.toBlob) {
-		    canvas.toBlob(
-		        function (blob) {
-		            console.log(blob)
-
-		        }
-		        //,
-		        //'image/jpeg'
-		    );
-		}*/
+		console.log(response.id);
+		_pubreg.temp.idpublicacion=response.id;
+		_pubreg.temp.imagenesCanvasParaEnviar=$("canvas").toArray();
+		_pubreg.f.agregarImagenAPublicacion();
 }
 
-_pubreg.f.agregarImagenAPublicacionCompletado = function(){
+_pubreg.f.agregarImagenAPublicacion=function(){
 
+	if(_pubreg.temp.imagenesCanvasParaEnviar.length>0){
+			var imgCanvas = _pubreg.temp.imagenesCanvasParaEnviar.shift();//remueve el primero y lo devuelve
+			if (imgCanvas.toBlob) {
+	    		imgCanvas.toBlob(
+			        function (blob) {
+			            
+			            var reader = new FileReader();
+							reader.readAsDataURL(blob); 
+							reader.onloadend = function() {
+	 							base64data = reader.result;                
+	 							_pubreg.servcom.f.agregarImagenAPublicacion(_pubreg.temp.idpublicacion,base64data,"nombreimagen",_pubreg.f.agregarImagenAPublicacionCompletado);
+			        
+							}
+			        }
+	    		);
+			}	
+		}		
+}
+
+_pubreg.f.agregarImagenAPublicacionCompletado = function(response){
+	_pubreg.f.agregarImagenAPublicacion(_pubreg.temp.idpublicacion);
 }

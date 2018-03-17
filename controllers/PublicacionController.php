@@ -86,9 +86,22 @@
 				$this->miSmarty->assign('razas',$razas);
 				$this->miSmarty->assign('barrios',$barrios);
 				$this->miSmarty->display('publicacion/publicacionregistro.tpl');
-			}
+			}	
+		}
 
-				
+		public function agregarImagen(){
+
+			if($_POST){
+
+				$nombreimagen = $_POST["nombreimagen"];
+				$imagen = $_POST["imagen"];
+				$idpublicacion = $_POST["idpublicacion"];
+
+				echo json_encode(array(
+										'imagen'=>$imagen,
+									  'nombreimagen' =>$nombreimagen,
+									  'idpublicacion'=>$idpublicacion));
+			}
 		}
 
 		private function obtenerFiltro($dic){
