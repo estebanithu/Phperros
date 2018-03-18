@@ -18,8 +18,15 @@ ul{
 .center{
 	text-align: center;
 }
-footer{
-	position: absolute;
-	width: 100%;
-	bottom: 0;
+
+#contenedor-panel{
+	min-height: 700px;
+}
+
+#estadisticas-totales{
+	text-align: center;
+}
+
+.single_counter i{
+	font-size: 100px;
 }

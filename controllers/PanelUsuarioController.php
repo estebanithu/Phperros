@@ -16,15 +16,31 @@
 			$this->miSmarty->assign("tienePublicaciones", $tienePublicaciones);
 			$this->miSmarty->assign("publicaciones", $publicacionesUsuario);
 			$this->miSmarty->display('panelUsuario/index.tpl');
-			//var_dump($publicacionesUsuario);die();
+		}
 
-			/*$publicaciones = $this->obtenerPublicacionesHome();
-			foreach ($publicaciones as $key => $value) {
-				//$publicaciones[$key]['img'] = 'uploads/'.$value['id'].'/1.jpg';
-				$publicaciones[$key]['img'] = $this->obtenerPrimerImagenPublicacion($value['id']);
+		public function verEstadisticas(){
+			$totalPublicaciones = $this->publicacionesModel->totalPublicaciones();
+			$estadisticasPorEspecie = $this->publicacionesModel->obtenerPublicacionesPorEspecie();
+			$totales = $this->obtenerTotales($estadisticasPorEspecie);
+			$this->miSmarty->assign("totalPublicaciones", $totalPublicaciones);
+			$this->miSmarty->assign("estadisticasPorEspecie", $estadisticasPorEspecie);
+			$this->miSmarty->assign("totales", $totales);
+			$this->miSmarty->display('panelUsuario/estadisticas.tpl');
+		}
+
+		private function obtenerTotales($estadisticasPorEspecie){
+			$totales = array();
+			$totales['abiertas'] = 0;
+			$totales['cerradas'] = 0;
+			$totales['exitosas'] = 0;
+			$totales['fracasadas'] = 0;
+			foreach ($estadisticasPorEspecie as $especie) {
+				$totales['abiertas']+= $especie['abiertas'];
+				$totales['cerradas']+= $especie['cerradas'];
+				$totales['exitosas']+= $especie['exitosas'];
+				$totales['fracasadas']+= $especie['fracasadas'];
 			}
-			$this->miSmarty->assign("publicaciones", $publicaciones);
-			$this->miSmarty->display('masterPage.tpl');*/
+			return $totales;
 		}
 
 	
