@@ -2,6 +2,8 @@
 
 	class PublicacionController extends BaseController{
 
+		private $root_images="uploads/";
+
 		public function __construct(){
 			parent::__construct();
 			require_once 'models/PublicacionesModel.php';
@@ -9,6 +11,7 @@
 			require_once 'models/EspecieModel.php';
 			require_once 'models/BarrioModel.php';
 			require_once 'models/PublicacionFiltro.php';
+			require_once 'models/Publicacion.php';
 			$this->publicacionesModel = new PublicacionesModel();
 			$this->especiesModel = new EspecieModel();
 			$this->razasModel = new RazaModel();
@@ -75,8 +78,62 @@
 			echo $this->miSmarty->display('publicacion/publicacionesconpaginado.tpl');
 		}
 
-		private function obtenerFiltro($dic){
+		public function registro(){
+			if($_POST){
+				$publicacion = $this->obtenerPublicacion($_POST);
+				//echo json_encode(array('prueba'=>$publicacion->esValida()));
+				if($publicacion->esValida()){
+					$id = $this->publicacionesModel->registrarPublicacion($publicacion);
+					mkdir($this->root_images.$id);
+					echo json_encode(array('id' => $id));
+				}
+				else{
+					echo json_encode(array('error' =>"Se produjo un error"));
+				}
+			}
+			else{
+				
+				$especies = $this->especiesModel->obtenerEspecies();
+				$razas = $this->razasModel->obtenerRazas();
+				$barrios = $this->barriosModel->obtenerBarrios();
+				$this->miSmarty->assign('especies',$especies);
+				$this->miSmarty->assign('razas',$razas);
+				$this->miSmarty->assign('barrios',$barrios);
+				$this->miSmarty->display('publicacion/publicacionregistro.tpl');
+			}	
+		}
 
+		public function agregarImagen(){
+
+			if($_POST){
+
+				$nombreimagen = $_POST["nombreimagen"];
+				$imagen = $_POST["imagen"];
+				$idpublicacion = $_POST["idpublicacion"];
+
+				$this->obtenerFile($imagen);
+				$file_path =$this->root_images.$idpublicacion."/".$nombreimagen;
+				if(!file_exists($file_path)){
+					$file=$this->obtenerFile($imagen);
+					file_put_contents($file_path,$file);
+				}
+
+				echo json_encode(array("success"=>"Imagen subida correctamente"));
+			}
+		}
+
+		private function obtenerFile($imgEnBase64){
+			if( strpos( $imgEnBase64,',') !== false ) {
+				$base_to_php = explode(',', $imgEnBase64);
+				$data = $base_to_php[1];
+			}else{
+				$data = $imgEnBase64;
+			}
+			$ret = base64_decode($data);
+			return $ret;
+		}
+
+		private function obtenerFiltro($dic){
 			$filtro = new PublicacionFiltro();
 			if($dic){
 				if(isset($dic['busqueda'])){
@@ -194,4 +251,31 @@
 			$pdf = new PDF();
 			$pdf->generarPublicacionEnPDF($publicacion,$fotosPublicacion);
 		}
-}
+		private function obtenerPublicacion($dic){
+
+			$publicacion = new Publicacion();
+			if($dic){
+				if(isset($dic['titulo'])){
+					$publicacion->titulo=$dic['titulo'];
+				}
+				if(isset($dic['descripcion'])){
+					$publicacion->descripcion=$dic['descripcion'];
+				}
+				if(isset($dic['tipo'])){
+					$publicacion->tipo=$dic['tipo'];
+				}
+				if(isset($dic['especie'])){
+					$publicacion->especie=$dic['especie'];
+				}
+				if(isset($dic['raza'])){
+					$publicacion->raza=$dic['raza'];
+				}
+				if(isset($dic['barrio'])){
+					$publicacion->barrio=$dic['barrio'];
+				}
+			}
+			return $publicacion;
+		}
+
+
+	}

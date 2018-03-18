@@ -192,6 +192,7 @@ _pub.f.mostrarOcultarRazas = function(){
 		$("#filtros-razas li").addClass("oculto");
 		_pub.f.aplicarEstiloFiltro($("#filtros-razas li"),false);
 
+
 		//recorro las especies seleccionadas
 		$.each(_pub.g.especiesseleccionadas,function(i,idespecie){
 			//muestro todas sus razas
@@ -204,6 +205,13 @@ _pub.f.mostrarOcultarRazas = function(){
 				});
 			}
 		})
+		//VER ESTO
+		//si las razas seleccionadas por especie no esta dentro de las especies seleccionadas, las elimino
+		$.each(_pub.g.razasseleccionadasporespecie,function(i,idespecie){
+			if(_pub.g.especiesseleccionadas.indexOf(idespecie)==-1){
+				delete _pub.g.razasseleccionadasporespecie[idespecie]
+			}
+		});
 
 	}
 	else{
