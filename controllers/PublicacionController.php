@@ -15,6 +15,10 @@
 			$this->barriosModel = new BarrioModel();
 		}
 
+		public function imagenes(){
+			$this->miSmarty->display('publicacion/imagenes.tpl');
+		}
+
 		public function index(){
 			$this->miSmarty->display('masterPage.tpl');
 		}
