@@ -30,3 +30,7 @@ ul{
 .single_counter i{
 	font-size: 100px;
 }
+
+.single_counter p{
+	font-weight: bold;
+}

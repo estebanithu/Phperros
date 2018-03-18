@@ -53,7 +53,7 @@
            			</div>
            		</div>
            		<hr>
-           		<h5>Segregadas por especie</h5>
+           		<h5><i class="fa fa-filter"></i> Segregadas por especie</h5>
            		<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -69,16 +69,16 @@
             				{foreach from=$estadisticasPorEspecie item=est }
             				  <tr>
             				    <td scope="row">{$est.nombre}</td>
-            				    <td class="statistic-counter">{$est.abiertas}</td>
-            				    <td class="statistic-counter">{$est.cerradas}</td>
-            				    <td class="statistic-counter">{$est.exitosas}</td>
-            				    <td class="statistic-counter">{$est.fracasadas}</td>    
+            				    <td>{$est.abiertas}</td>
+            				    <td>{$est.cerradas}</td>
+            				    <td>{$est.exitosas}</td>
+            				    <td>{$est.fracasadas}</td>    
             				  </tr>
             				{/foreach}
             			</tbody>
 					</table>
                </div>
-               <a href="PanelUsuario" class="btn btn-danger"> << Volver al panel de usuario </a>
+               <a href="PanelUsuario" class="btn btn-danger"><i class="fa fa-backward"></i> Volver al panel de usuario </a>
            </div>
        </section><!-- End of counter Section -->
     		
