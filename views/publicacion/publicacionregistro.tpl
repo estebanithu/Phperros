@@ -14,6 +14,27 @@
 
 <body>
 	{include file='navBar.tpl'}
+	<div id="modal-registro-publicacion" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Publicación finalizada con exito</h4>
+                </div>
+                <div id="modal-body-RegistroPublicacion" class="modal-body mediumFont">
+	                <div class='row'>
+	                    <a id="nueva-publicacion" class="btn btn-block btn-lg btn-success submit" type="button" href="Publicacion/registro/">Registrar nueva publicación</a>
+	                </div>
+	                <div class="row">
+	                 	<a id="ver-publicaciones" class="btn btn-block btn-lg btn-primary submit" type="button">
+	                 		Ver mis publicaciones
+	                 	</a>
+	                </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 	<div id="container-principal" class="row">
 		<h3 style="margin:auto">Registro publicacion</h3>
 		<div id="container-error" class="alert alert-danger oculto">
@@ -76,11 +97,12 @@
 				            <span>Agregue imagenes...</span>
 				            <input type="file" name="files[]" multiple>
 			         	</span>
-			         	<button  id="upload-all-images" type="submit" class="btn btn-primary start">
+			         	<span style="font-style: italic;"> Intente arrastrar las imagenes aquí </span>
+			         	<button  id="upload-all-images" type="submit" class="btn btn-primary start" style="display:none">
 		                    <i class="glyphicon glyphicon-upload"></i>
-		                    <span>Start upload</span>
+		                    <span >Start upload</span>
 		                </button>
-		                <button type="reset" class="btn btn-warning cancel">
+		                <!--<button type="reset" class="btn btn-warning cancel">
 		                    <i class="glyphicon glyphicon-ban-circle"></i>
 		                    <span>Cancel upload</span>
 		                </button>
@@ -89,8 +111,7 @@
 		                    <span>Delete</span>
 		                </button>
 		                <input type="checkbox" class="toggle">
-		                <!-- The global file processing state -->
-		                <span class="fileupload-process"></span>
+		                <span class="fileupload-process"></span>-->
 		                </div>
 					</div>
 		         	<table id="tabla-imagenes" role="presentation" class="table table-striped">
@@ -118,7 +139,12 @@
 	        </td>
 	        <td>
 	            <p class="size">Processing...</p>
-	            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+	            {% if (!i) { %}
+	                <button class="btn btn-warning cancel">
+	                    <i class="glyphicon glyphicon-ban-circle"></i>
+	                    <span>Cancel</span>
+	                </button>
+	            {% } %}
 	        </td>
 	        <td>
 	            {% if (!i && !o.options.autoUpload) { %}
@@ -127,12 +153,7 @@
 	                    <span>Start</span>
 	                </button>
 	            {% } %}
-	            {% if (!i) { %}
-	                <button class="btn btn-warning cancel">
-	                    <i class="glyphicon glyphicon-ban-circle"></i>
-	                    <span>Cancel</span>
-	                </button>
-	            {% } %}
+	            
 	        </td>
 	    </tr>
 	{% } %}

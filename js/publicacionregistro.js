@@ -28,29 +28,13 @@ _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
 	});
 
 }
-_pubreg.servcom.f.agregarImagenAPublicacion= function(idpublicacion,base64image,nombreimagen,callback){
-
-	var fd = new FormData();
-	fd.append('nombreimagen', nombreimagen);
-	fd.append('imagen', base64image);
-	fd.append('idpublicacion', idpublicacion);
-	$.ajax({
-	    type: 'POST',
-	    url: 'Publicacion/agregarImagen',
-	    data: fd,
-	    processData: false,
-	    contentType: false
-	}).done(function(data) {
-			//console.log(data);
-	       _pubreg.f.agregarImagenAPublicacionCompletado();
-	});
-}
 
 _pubreg.f.initialize = function(){
 
 	$(document).on("click","#btn-registrar",_pubreg.f.registrarPublicacion);
 	$(document).on("click","#close-error",function(){$("#container-error").addClass("oculto")});
 	$(document).on("change","#select-especie",_pubreg.f.cambioEspecie);
+	$(document).on("focus",".campo-error",function(){$(this).removeClass("campo-error")})
 }
 
 _pubreg.f.cambioEspecie = function(){
@@ -154,39 +138,24 @@ _pubreg.f.validarForm = function(){
 
 _pubreg.f.registrarPublicacionCompletado = function(response){
 		_pubreg.temp.idpublicacion=response.id;
+		//agrego input para enviar idpublicacion en el post del form
 		var input = $("<input>")
                .attr("type", "hidden")
                .attr("name", "idpublicacion").val(_pubreg.temp.idpublicacion);
 		 $('#upload-all-images').append($(input));
+
+		 //cuando se suben las imagenes, se borras las filas y se agregan
+		 //nuevas...esto lo hace el plugin en algun js. Una vez que se hayan recargado todas las filas
+		 //significa que las imagenes fueron subidas
+		 //NO ES LA MEJOR MANERA, ES QUE USANDO ESTA LIBRERIA
+		 //NO LOGRAMOS LOCALIZAR EN QUE LUGAR SE ENGANCHA AL EVENTO DONE DEL SUBMIT DEL FORMULARIO
+		 var cantidadimagenes=$("#tabla-imagenes tbody tr").toArray().length;
+		 $("#tabla-imagenes tbody tr").bind('DOMSubtreeModified',function(){
+		      if(--cantidadimagenes==0){
+		      			$("#modal-registro-publicacion").modal({backdrop: 'static', keyboard: false})  
+		      }
+		  });
+
 		 $("#upload-all-images").click();
-		/*_pubreg.temp.imagenesCanvasParaEnviar=$("#tabla-imagenes canvas").toArray();
-		_pubreg.temp.nombresDeImagenesParaEnviar=$("#tabla-imagenes .name").toArray();
-		_pubreg.f.agregarImagenAPublicacion();*/
-}
 
-_pubreg.f.agregarImagenAPublicacion=function(){
-
-	if(_pubreg.temp.imagenesCanvasParaEnviar.length>0){
-			var imgCanvas = _pubreg.temp.imagenesCanvasParaEnviar.shift();//remueve el primero y lo devuelve
-			var nombre = $(_pubreg.temp.nombresDeImagenesParaEnviar.shift()).html();
-			nombre=nombre.split(".")[0];
-			if (imgCanvas.toBlob) {
-	    		imgCanvas.toBlob(
-			        function (blob) {
-			            
-			            var reader = new FileReader();
-							reader.readAsDataURL(blob); 
-							reader.onloadend = function() {
-	 							base64data = reader.result;                
-	 							_pubreg.servcom.f.agregarImagenAPublicacion(_pubreg.temp.idpublicacion,base64data,nombre,_pubreg.f.agregarImagenAPublicacionCompletado);
-			        
-							}
-			        }
-	    		);
-			}	
-		}		
-}
-
-_pubreg.f.agregarImagenAPublicacionCompletado = function(response){
-	_pubreg.f.agregarImagenAPublicacion(_pubreg.temp.idpublicacion);
 }

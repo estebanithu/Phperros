@@ -1,3 +1,10 @@
+
+#modal-body-RegistroPublicacion{
+	color:white;
+}
+#modal-body-RegistroPublicacion a{
+	margin:10px;
+}
 #container-principal{
 	padding:50px;
 	min-height: 400px;
@@ -29,6 +36,10 @@
 #btn-registrar{
 	margin:25px auto 25px auto !important;
 	max-width: 	300px
+}
+
+.template-upload.in td:nth-child(4){
+	display: none;
 }
 
 @media (max-width:500px){
