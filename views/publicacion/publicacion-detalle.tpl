@@ -21,7 +21,7 @@
 						<div><img class='img-responsive' src='{$img}'></div>
 					{/foreach}
 				{else}
-					<div><img src="uploads/defecto.png"></div>
+					<div><img src="img/defecto.png"></div>
 				{/if}
 			</div>
 		</div>

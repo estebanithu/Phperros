@@ -35,25 +35,4 @@
 			$recorte.='...';
 			return $recorte;
 		}
-
-		private function obtenerPrimerImagenPublicacion($id){
-			$dir = 'uploads/'.$id.'/';
-			$imagenes = scandir($dir);
-			$encuentro = FALSE;
-			$i = 0;
-			while (!$encuentro) {
-				$img = $imagenes[$i];
-				if($img != '.' && $img != '..' && $img != ''){
-					$retorno = 'uploads/'.$id.'/'.$img;
-					$encuentro = TRUE;
-				}
-				if($i > 2){
-					$retorno = 'uploads/defecto.png';
-					$encuentro = TRUE;
-				}
-				$i++;
-			}
-			return $retorno;
-		}
-
 	}

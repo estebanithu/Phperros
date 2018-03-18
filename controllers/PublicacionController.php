@@ -39,6 +39,7 @@
 			$filtro = $this->obtenerFiltro($_GET);
 			$busqueda=$filtro->busqueda;
 			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
+			$publicacionesconsulta=$this->agregarImagenAPublicaciones($publicacionesconsulta);
 			$publicaciones=$publicacionesconsulta->publicaciones;
 			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
 			$cantidadPaginasDePublicaciones=$cantidadTotalPublicaciones/$filtro->cant;
@@ -64,6 +65,7 @@
 		public function obtenertodas(){
 			$filtro = $this->obtenerFiltro($_POST);
 			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
+			$publicacionesconsulta=$this->agregarImagenAPublicaciones($publicacionesconsulta);
 			$publicaciones=$publicacionesconsulta->publicaciones;
 			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
 			$cantidadPaginasDePublicaciones=$filtro->cant>$cantidadTotalPublicaciones?
@@ -76,6 +78,15 @@
 			$this->miSmarty->assign('paginaseleccionada',$paginaseleccionada);	
 
 			echo $this->miSmarty->display('publicacion/publicacionesconpaginado.tpl');
+		}
+
+		private function agregarImagenAPublicaciones($publicaciones){
+			$publicacionesarray=$publicaciones->publicaciones;
+			foreach ($publicacionesarray as $key => $value) {
+				$publicacionesarray[$key]['img'] = $this->obtenerPrimerImagenPublicacion($publicacionesarray[$key]['id']);
+			}
+			$publicaciones->publicaciones=$publicacionesarray;
+			return $publicaciones;
 		}
 
 		public function registro(){
@@ -101,36 +112,6 @@
 				$this->miSmarty->assign('barrios',$barrios);
 				$this->miSmarty->display('publicacion/publicacionregistro.tpl');
 			}	
-		}
-
-		public function agregarImagen(){
-
-			if($_POST){
-
-				$nombreimagen = $_POST["nombreimagen"];
-				$imagen = $_POST["imagen"];
-				$idpublicacion = $_POST["idpublicacion"];
-
-				$this->obtenerFile($imagen);
-				$file_path =$this->root_images.$idpublicacion."/".$nombreimagen;
-				if(!file_exists($file_path)){
-					$file=$this->obtenerFile($imagen);
-					file_put_contents($file_path,$file);
-				}
-
-				echo json_encode(array("success"=>"Imagen subida correctamente"));
-			}
-		}
-
-		private function obtenerFile($imgEnBase64){
-			if( strpos( $imgEnBase64,',') !== false ) {
-				$base_to_php = explode(',', $imgEnBase64);
-				$data = $base_to_php[1];
-			}else{
-				$data = $imgEnBase64;
-			}
-			$ret = base64_decode($data);
-			return $ret;
 		}
 
 		private function obtenerFiltro($dic){

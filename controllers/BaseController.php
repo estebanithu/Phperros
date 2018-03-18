@@ -33,8 +33,27 @@
 			header("Location: ".$url);
 		}
 
-
-
+		protected function obtenerPrimerImagenPublicacion($id){
+			$dir = 'uploads/'.$id.'/';
+			$retorno = 'img/defecto.png';
+			if(is_dir($dir)){
+				$imagenes = scandir($dir);
+				$encuentro = FALSE;
+				$i = 0;
+				while (!$encuentro) {
+					$img = $imagenes[$i];
+					if($img != '.' && $img != '..' && $img != ''){
+						$retorno = 'uploads/'.$id.'/'.$img;
+						$encuentro = TRUE;
+					}
+					if($i > 2){	
+						$encuentro = TRUE;
+					}
+					$i++;
+				}
+			}
+			return $retorno;
+		}
 
 
 	}

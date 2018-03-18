@@ -20,10 +20,10 @@ _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
             callback(response)
         },
         failure: function (response) {
-            callback(response)
+            callback()
         },
         error: function (response) {
-            callback(response)
+            callback()
     	}
 	});
 
@@ -137,6 +137,8 @@ _pubreg.f.validarForm = function(){
 }
 
 _pubreg.f.registrarPublicacionCompletado = function(response){
+
+	if(response){
 		_pubreg.temp.idpublicacion=response.id;
 		//agrego input para enviar idpublicacion en el post del form
 		var input = $("<input>")
@@ -157,5 +159,9 @@ _pubreg.f.registrarPublicacionCompletado = function(response){
 		  });
 
 		 $("#upload-all-images").click();
+	}
+	else{
+		alert("Se produjo un error inesperado, comuniquese con el administrador")
+	}
 
 }
