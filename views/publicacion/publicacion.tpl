@@ -4,9 +4,9 @@
   <div class="card h-100">
     <a target="_blank" href="Publicacion/verDetalle/{$pub.id}"><img class="card-img-top" src="{$pub.img}" alt=""></a>
       {if $pub.tipo == 'E'}
-        <div class="alert alert-success" role="alert" style="text-align: center;padding: 0;" >Encontrado</div>
+        <div class="alert alert-success" role="alert" style="text-align: center;padding: 0;" ><i class='fa fa-check-circle'></i> Encontrado</div>
       {else}
-        <div class="alert alert-danger" role="alert"  style="text-align: center;padding: 0;">Perdido</div>
+        <div class="alert alert-danger" role="alert"  style="text-align: center;padding: 0;"><i class='fa fa-search'></i> Perdido</div>
       {/if}
     <div class="card-body">
       <h4 class="card-title">

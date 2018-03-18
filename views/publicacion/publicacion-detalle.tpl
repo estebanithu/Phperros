@@ -5,8 +5,8 @@
 <link rel='stylesheet' type='text/css' href='css/publicacion-detalle.css'>
 {include file='navBar.tpl'}
 {if $publicacion.abierta == 0}
-	<div class="alert alert-warning center">
-	  <strong>Atención!</strong> Esta publicación ya ha sido cerrada.
+	<div id="alert-publicacion-cerrada" class="alert alert-warning center">
+	  <i class="fa fa-exclamation-triangle"></i> <strong>Atención!</strong> Esta publicación ya ha sido cerrada.
 	</div>
 {/if}
 <div id='contenedor-publicacion' class='container'>
@@ -27,9 +27,9 @@
 		</div>
 		<div id='descripcion' class='col-xs-6 col-lg-4'>
 			{if $publicacion.tipo == 'E'}
-				<div class='alert alert-success alert-chico' role='alert'>Encontrado</div>
+				<div class='alert alert-success alert-chico' role='alert'><i class='fa fa-check-circle'></i> Encontrado</div>
 			{else}
-				<div class='alert alert-danger alert-chico' role='alert'>Perdido</div>
+				<div class='alert alert-danger alert-chico' role='alert'><i class='fa fa-search'></i> Perdido</div>
 			{/if}
 			<h4>Descripción</h4>
 			{$publicacion.descripcion}
@@ -40,6 +40,10 @@
 			<div><i class='fa fa-envelope'></i> <a href='mailto:{$publicacion.usr_email}' target='_top'>{$publicacion.usr_email}</a></div>
 		</div>
 			{include file='publicacion/cerrar-publicacion.tpl'}	
+			<hr>
+			<div>
+				<a href="Publicacion/generarPublicacionPDF/{$publicacion.id}" target="_blank" class="btn btn-success"><i class='fa fa-file-pdf-o'></i> Generar PDF</a>
+			</div>
 		</div>
 	</section>
 	<hr>

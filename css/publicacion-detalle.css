@@ -58,6 +58,9 @@
 }
 
 #cerrar-publicacion-respuesta{
-	margin-bottom: 10px;
+	margin: 10 5 10 5;
 }
 
+#alert-publicacion-cerrada{
+	margin-top: 14px;
+}
