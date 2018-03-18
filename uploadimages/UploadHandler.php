@@ -44,8 +44,8 @@ class UploadHandler
         $this->response = array();
         $this->options = array(
             'script_url' => $this->get_full_url().'/'.$this->basename($this->get_server_var('SCRIPT_NAME')),
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/../uploads/',
-            'upload_url' => $this->get_full_url().'/../uploads/',
+            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/../uploads/',//ROCKO CAMBIE PATH
+            'upload_url' => $this->get_full_url().'/../uploads/',//ROCKO CAMBIE PATH
             'input_stream' => 'php://input',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
@@ -1064,8 +1064,9 @@ class UploadHandler
             }
         }
         if (count($failed_versions)) {
-            $file->error = $this->get_error_message('image_resize')
-                    .' ('.implode($failed_versions, ', ').')';
+            //ROCKO PARA QUE NO DE ERROR
+            //$file->error = $this->get_error_message('image_resize')
+            //        .' ('.implode($failed_versions, ', ').')';
         }
         // Free memory:
         $this->destroy_image_object($file_path);

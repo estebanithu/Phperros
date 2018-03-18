@@ -69,18 +69,37 @@
 			  </div>
 			  <hr>
 			  <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-				<span class="btn btn-success fileinput-button">
-		            <i class="glyphicon glyphicon-plus"></i>
-		            <span>Agregue imagenes...</span>
-		            <input type="file" name="files[]" multiple>
-	         	</span>
-	         <table id="tabla-imagenes" role="presentation" class="table table-striped">
-	         		<tbody class="files">
-	         			
-	         		</tbody>
-	         </table>
-	         <input id="btn-registrar" class="btn btn-block btn-lg btn-success submit" type="button" value="Registrar"><br>
-	    </form>
+				  <div class="row fileupload-buttonbar">
+	            	<div class="col-lg-7">
+						<span class="btn btn-success fileinput-button">
+				            <i class="glyphicon glyphicon-plus"></i>
+				            <span>Agregue imagenes...</span>
+				            <input type="file" name="files[]" multiple>
+			         	</span>
+			         	<button type="submit" class="btn btn-primary start">
+		                    <i class="glyphicon glyphicon-upload"></i>
+		                    <span>Start upload</span>
+		                </button>
+		                <button type="reset" class="btn btn-warning cancel">
+		                    <i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>Cancel upload</span>
+		                </button>
+		                <button type="button" class="btn btn-danger delete">
+		                    <i class="glyphicon glyphicon-trash"></i>
+		                    <span>Delete</span>
+		                </button>
+		                <input type="checkbox" class="toggle">
+		                <!-- The global file processing state -->
+		                <span class="fileupload-process"></span>
+		                </div>
+					</div>
+		         	<table id="tabla-imagenes" role="presentation" class="table table-striped">
+		         		<tbody class="files">
+		         			
+		         		</tbody>
+		         	</table>
+		         	<input id="btn-registrar" class="btn btn-block btn-lg btn-success submit" type="button" value="Registrar"><br>
+	    	</form>
 		</div>
 	</div>
 	{include file='footer.tpl'}
