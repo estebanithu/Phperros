@@ -67,11 +67,14 @@ function cerrarPublicacion(){
 			type: 'POST',
 			success: function(result){
 				let clase = 'alert-danger';
+				let icono = '<i class="fa fa-exclamation-triangle"></i>';
 				let respuesta = $.parseJSON(result);
 				if(!respuesta.error){
 					clase = 'alert-success';
+					icono = '<i class="fa fa-check-circle"></i>';
+					$(".cerrar-publicacion").css('display','none');
 				}
-				let alert = `<div class="alert ${clase} alert-chico" role="alert">${respuesta.mensaje}</div>`;
+				let alert = `<div class="alert ${clase} alert-chico" role="alert"> ${icono} ${respuesta.mensaje}</div>`;
 				$('#cerrar-publicacion-respuesta').empty();
 				$('#cerrar-publicacion-respuesta').append(alert);
 			}

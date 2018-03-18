@@ -11,7 +11,8 @@
 		public function index(){
 			$publicaciones = $this->obtenerPublicacionesHome();
 			foreach ($publicaciones as $key => $value) {
-				$publicaciones[$key]['img'] = 'uploads/'.$value['id'].'/1.jpg';
+				//$publicaciones[$key]['img'] = 'uploads/'.$value['id'].'/1.jpg';
+				$publicaciones[$key]['img'] = $this->obtenerPrimerImagenPublicacion($value['id']);
 			}
 			$this->miSmarty->assign("publicaciones", $publicaciones);
 			$this->miSmarty->display('masterPage.tpl');
@@ -33,6 +34,26 @@
 			$recorte = substr($descripcion, 0, 150);
 			$recorte.='...';
 			return $recorte;
+		}
+
+		private function obtenerPrimerImagenPublicacion($id){
+			$dir = 'uploads/'.$id.'/';
+			$imagenes = scandir($dir);
+			$encuentro = FALSE;
+			$i = 0;
+			while (!$encuentro) {
+				$img = $imagenes[$i];
+				if($img != '.' && $img != '..' && $img != ''){
+					$retorno = 'uploads/'.$id.'/'.$img;
+					$encuentro = TRUE;
+				}
+				if($i > 2){
+					$retorno = 'uploads/defecto.png';
+					$encuentro = TRUE;
+				}
+				$i++;
+			}
+			return $retorno;
 		}
 
 	}

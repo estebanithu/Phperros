@@ -1,80 +1,92 @@
 <?php
+    require_once 'libs/fpdf/fpdf.php';
 
-	require_once 'libs/fpdf/fpdf.php';
+    class PDF extends FPDF{
 
-	class GeneradorPDF extends FPDF{
+        function __construct(){
+            parent::__construct();
+            $this->AddPage();
+        }
 
-		protected $pub;
-		protected $pdf;
-		protected $fotos;
+        public function generarPublicacionEnPDF($publicacion,$fotosPublicacion){     
+            $this->titulo(utf8_decode($publicacion->titulo),$publicacion->tipo);
+            $this->especieRaza(utf8_decode($publicacion->especie),utf8_decode($publicacion->raza));
+            $this->imprimirImagenes($fotosPublicacion);
+            $this->imprimirDescripcionContacto(utf8_decode($publicacion->descripcion),utf8_decode($publicacion->usr_nom),$publicacion->usr_email);
+            $this->Output();
+        }
 
-		public function generarPublicacionEnPDF($publicacion, $fotos){
-			//var_dump($publicacion);die();
-			$this->pub = $publicacion;
-			$this->fotos = $fotos;
-			$this->pdf = new FPDF();
-			$this->pdf->AliasNbPages();
-			$this->pdf->AddPage();
+        // Page header
+        private function titulo($titulo,$tipo)
+        {
+            $this->SetTitle($titulo);
+            $this->SetFont('Arial','B',15);
+            $this->Cell(80);   
 
-			$this->titulo();
-			$this->especieRaza();
-			$this->fotos();
-			$this->descripcion();
+            if($tipo == 'E'){
+                $this->setearColor(21, 87, 36);
+                $this->Cell(35,10,'Encontrado',1,1,'C');
+            }else{
+                $this->setearColor(114, 28, 36);
+                $this->Cell(35,10,'Perdido',1,1,'C');
+            }
+            
+            $this->Ln(5);
+
+            $this->setearColor(0, 0, 0);
+
+            $this->SetTitle($titulo);
+
+            // Move to the right
+            $this->Cell(80);
+            // Title
+            $this->Cell(30,10,$titulo,0,0,'C');
+            // Line break
+            $this->Ln(10);
+        }
+
+        private function setearColor($r,$g,$b){
+            $this->SetTextColor($r, $g, $b);
+            $this->SetDrawColor($r, $g, $b);
+        }
+
+        private function especieRaza($especie,$raza){
+            $this->SetFont('Arial','',12);
+            $this->Cell(0,10,$especie.' > '.$raza,0,1);
+        }
+
+        function Footer()
+        {
+            // Page footer
+            $this->SetY(-15);
+            $this->SetFont('Arial','I',8);
+            $this->SetTextColor(128);
+            $this->Cell(180,10,'PhpPerros&Cia.',0,0,'C');
+        }
 
 
-			$this->pdf->Output();
-		}
+        private function imprimirImagenes($imagenes){
+            $this->SetY(50);
+            foreach ($imagenes as $foto) {
+                $this->Image($foto,NULL,NULL,70);
+                $this->Ln(1);
+            }
+        }
 
-		// Page header
-		public function titulo()
-		{
-		    $this->pdf->SetFont('Arial','B',15);
-			$this->pdf->Cell(80);	
+        private function imprimirDescripcionContacto($descripcion,$nombre,$email){
+            $this->SetLeftMargin(90);
+            $this->SetX(10);
+            $this->SetY(50);
+            $this->SetFont('Times','',12);
+            // Output text in a 6 cm width column
+            $this->MultiCell(100,5,$descripcion);
+            $this->Ln(10);
+            $this->SetFont('Arial','B',15);
+            $this->MultiCell(100,5,'Contacto');
+            $this->Ln(1);
+            $this->SetFont('Times','',12);
+            $this->MultiCell(100,5,$nombre);
+            $this->MultiCell(100,5,$email);
+        }
 
-			if($this->pub->tipo == 'E'){
-				$this->pdf->Cell(35,10,'Encontrado',1,1,'C');
-			}else{
-				$this->pdf->Cell(35,10,'Perdido',1,1,'C');
-			}
-			
-			$this->pdf->Ln(5);
-
-			$this->pdf->SetTitle($this->pub->titulo);
-
-		    // Move to the right
-		    $this->pdf->Cell(80);
-		    // Title
-		    $this->pdf->Cell(30,10,$this->pub->titulo,0,0,'C');
-		    // Line break
-		    $this->pdf->Ln(10);
-		}
-
-
-		public function especieRaza(){
-			$this->pdf->SetFont('Arial','',12);
-			$this->pdf->Cell(0,10,$this->pub->especie.' > '.$this->pub->raza,0,1);
-		}
-
-		public function fotos(){
-			foreach ($this->fotos as $foto) {
-				$this->pdf->Image($foto,NULL,NULL,70);
-			}
-		}
-
-		public function descripcion(){
-			$this->pdf->SetFont('Arial','',12);
-			$this->pdf->Cell(0,60,$this->pub->descripcion,0,1);
-		}
-
-		// Page footer
-		public function footer()
-		{
-		    // Position at 1.5 cm from bottom
-		    $this->SetY(-15);
-		    // Arial italic 8
-		    $this->SetFont('Arial','I',8);
-		    // Page number
-		    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-		}
-
-	}
+    }

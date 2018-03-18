@@ -128,8 +128,9 @@
 		}
 
 		private function armarHtmlPregunta($pregunta){
+			$nombreUsuario = $_SESSION['usuarioLogueado']['nombre'];
 			$ret = '<li class="pregunta-respuesta" style="list-style:  none; border-bottom: 1px solid rgba(0,0,0,.1); padding-bottom: 10px;padding-top: 10px;">
-					<article class="pregunta" style="margin-bottom: 5px;"><i class="fa fa-comment"></i> '.$pregunta.'</article>
+					<article class="pregunta" style="margin-bottom: 5px;"><i class="fa fa-comment"></i> '.$nombreUsuario.': '.$pregunta.'</article>
 				</li>';
 			return $ret;
 		}
@@ -187,10 +188,10 @@
 		}
 
 		public function generarPublicacionPDF($id){
+			require_once 'services/GeneradorPDF.php';
 			$publicacion = (object) $this->publicacionesModel->obtenerPublicacion($id);
 			$fotosPublicacion = $this->obtenerImagenes($id);
-			require_once 'services/GeneradorPDF.php';
-			$generadorPDF = new GeneradorPDF();
-			$generadorPDF->generarPublicacionEnPDF($publicacion, $fotosPublicacion);
+			$pdf = new PDF();
+			$pdf->generarPublicacionEnPDF($publicacion,$fotosPublicacion);
 		}
 }
