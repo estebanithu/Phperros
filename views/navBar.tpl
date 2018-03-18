@@ -35,10 +35,10 @@
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="Login/logout">Cerrar sesión</a>
+              <a class="nav-link" href="Login/logout"><i class='fa fa-sign-out'></i> Cerrar sesión</a>
           </li>
           {else}
-              <a class="nav-link" href="Login">Iniciar sesión</a>
+              <a class="nav-link" href="Login"><i class='fa fa-sign-in'></i> Iniciar sesión</a>
               <span class="sr-only">(current)</span>
           {/if}
       </ul>

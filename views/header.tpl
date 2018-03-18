@@ -2,8 +2,8 @@
     <base href="/Phperros/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Phperros&Cia. Perdidos y encontrados">
+    <meta name="author" content="Esteban Ithurralde - Rodrigo Pintos">
 
     <title>Phperros&Cia. perdidos y encontrados</title>
     <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
@@ -25,5 +25,6 @@
     <link href="css/main.css" rel="stylesheet">
 
     <link href="fonts/fonts-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 
   </head>

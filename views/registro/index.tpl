@@ -11,20 +11,22 @@
     				<input type="text" required class="form-control" id="nombre-completo" name="nombre-completo" placeholder="Nombre Completo">
     				<input type="email" required class="form-control email" id="email" name="email" placeholder="Email">
     				<input type="password" required class="form-control password" id="password" name="password" placeholder="Contraseña">
-    				<div id="error-password" class="alert alert-danger"><strong>Error!</strong> La contraseña debe contener al menos 8 caracteres, una letra y un número</div>
+    				<div id="error-password" class="alert alert-danger"><i class='fa fa-exclamation-triangle'></i> <strong>Error!</strong> La contraseña debe contener al menos 8 caracteres, una letra y un número</div>
 					<label class="checkbox-inline">
 						<!--<input type="checkbox" id="remember" value="Remember me"> Remember me-->
 					</label>
-					<input class="btn btn-block btn-lg btn-success submit" type="submit" value="Registrarme!">
+					<button class="btn btn-block btn-lg btn-success submit" type="submit"> <i class="fa fa-check-square"></i> Registrarme!</button>
 				</form>
 				{if isset($mensaje)}
 				<hr>
 					{if $mensaje.es_error}
 						<div class="alert alert-danger">
+						  <i class='fa fa-exclamation-triangle'></i>
 						  <strong>Error!</strong> 
 					{else}
 						<div class="alert alert-success">
-						<strong>Felicitaciones!</strong> 		
+						<i class='fa fa-check-circle'></i>
+						<strong> Felicitaciones!</strong> 		
 					{/if}
 					{$mensaje.feedback}
 					</div>

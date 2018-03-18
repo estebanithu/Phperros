@@ -12,7 +12,7 @@
 					<label class="checkbox-inline">
 						<!--<input type="checkbox" id="remember" value="Remember me"> Remember me-->
 					</label>
-					<input class="btn btn-block btn-lg btn-success submit" type="submit" value="Ingresar">
+					<button class="btn btn-block btn-lg btn-success submit" type="submit"><i class='fa fa-sign-in'></i> Ingresar </button>
 				</form>
 				{if isset($error)}
 				<hr>
@@ -20,7 +20,7 @@
 					  <strong>Error!</strong> {$error}.
 					</div>
 				{/if}
-			<a href="Registro" class="btn btn-sm btn-primary register">Registrarse</a>
+			<a href="Registro" class="btn btn-sm btn-primary register"><i class="fa fa-check-square"></i> Registrarse</a>
 			<!--<a href="#" class="btn btn-sm btn-default forgot">Forgot your password?</a>-->
 	</div>
 </div>
