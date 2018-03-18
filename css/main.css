@@ -15,3 +15,11 @@ ul{
 .oculto{
 	display:none;
 }
+.center{
+	text-align: center;
+}
+footer{
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}

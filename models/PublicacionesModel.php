@@ -13,6 +13,15 @@
 		    return $cn->restantesRegistros();
 		}
 
+		public function obtenerPublicacionesUsuario($usuario_id) {
+		    $cn = $this->getConexion();
+		    $cn->consulta("SELECT id,titulo,IF(tipo = 'E','Encontrado','Perdido') as tipo, IF(abierto = 1,'Abierta','Cerrada') as estado from publicaciones WHERE usuario_id = :usuario_id",
+		    	array(
+		    		array("usuario_id", intval($usuario_id), 'int')
+		    	));
+		    return $cn->restantesRegistros();
+		}
+
 		public function obtenerPublicacionesConFiltro($filtro) {
 		    $cn = $this->getConexion();
 		    $consultaResultado = new PublicacionConsultaResultado();
