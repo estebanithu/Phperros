@@ -41,11 +41,14 @@ class UploadHandler
     protected $image_objects = array();
 
     public function __construct($options = null, $initialize = true, $error_messages = null) {
+
+        $folder = isset($_POST["idpublicacion"])?$_POST["idpublicacion"]:"";
+
         $this->response = array();
         $this->options = array(
             'script_url' => $this->get_full_url().'/'.$this->basename($this->get_server_var('SCRIPT_NAME')),
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/../uploads/',//ROCKO CAMBIE PATH
-            'upload_url' => $this->get_full_url().'/../uploads/',//ROCKO CAMBIE PATH
+            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/../uploads/'.$folder.'/',//ROCKO CAMBIE PATH
+            'upload_url' => $this->get_full_url().'/../uploads/'.$folder.'/',//ROCKO CAMBIE PATH
             'input_stream' => 'php://input',
             'user_dirs' => false,
             'mkdir_mode' => 0755,

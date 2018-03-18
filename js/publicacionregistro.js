@@ -153,11 +153,15 @@ _pubreg.f.validarForm = function(){
 }
 
 _pubreg.f.registrarPublicacionCompletado = function(response){
-		console.log(response.id);
 		_pubreg.temp.idpublicacion=response.id;
-		_pubreg.temp.imagenesCanvasParaEnviar=$("#tabla-imagenes canvas").toArray();
+		var input = $("<input>")
+               .attr("type", "hidden")
+               .attr("name", "idpublicacion").val(_pubreg.temp.idpublicacion);
+		 $('#upload-all-images').append($(input));
+		 $("#upload-all-images").click();
+		/*_pubreg.temp.imagenesCanvasParaEnviar=$("#tabla-imagenes canvas").toArray();
 		_pubreg.temp.nombresDeImagenesParaEnviar=$("#tabla-imagenes .name").toArray();
-		_pubreg.f.agregarImagenAPublicacion();
+		_pubreg.f.agregarImagenAPublicacion();*/
 }
 
 _pubreg.f.agregarImagenAPublicacion=function(){
