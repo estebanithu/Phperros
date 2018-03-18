@@ -25,14 +25,4 @@
 			}
 			return $publicaciones;
 		}
-
-		private function recortarDescripcion($descripcion, $cantidadCaracteres){
-			$largoDescripcion = strlen($descripcion);
-			if($largoDescripcion < 150){
-				return $descripcion;
-			}
-			$recorte = substr($descripcion, 0, 150);
-			$recorte.='...';
-			return $recorte;
-		}
 	}

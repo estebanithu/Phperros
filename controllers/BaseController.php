@@ -33,6 +33,7 @@
 			header("Location: ".$url);
 		}
 
+		//ESTAS DE AQUI ABAJO PODRIAN LLEVARSE A UN HELPER
 		protected function obtenerPrimerImagenPublicacion($id){
 			$dir = 'uploads/'.$id.'/';
 			$retorno = 'img/defecto.png';
@@ -53,6 +54,16 @@
 				}
 			}
 			return $retorno;
+		}
+
+		protected function recortarDescripcion($descripcion, $cantidadCaracteres){
+			$largoDescripcion = strlen($descripcion);
+			if($largoDescripcion < 150){
+				return $descripcion;
+			}
+			$recorte = substr($descripcion, 0, 150);
+			$recorte.='...';
+			return $recorte;
 		}
 
 

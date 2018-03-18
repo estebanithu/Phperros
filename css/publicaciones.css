@@ -53,3 +53,18 @@ li{
 .pagination{
 	margin:10px;
 }
+
+.publicacion-item{
+	min-height: 525px
+}
+.pubimage{
+	max-height: 300px;
+}
+.publicacion-tipo-alert{
+	margin:0px;
+	padding:10px;
+}
+.publicacion-descripcion{
+	background: white;
+    padding: 15px;
+}

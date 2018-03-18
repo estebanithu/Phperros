@@ -40,6 +40,7 @@
 			$busqueda=$filtro->busqueda;
 			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
 			$publicacionesconsulta=$this->agregarImagenAPublicaciones($publicacionesconsulta);
+			$publicacionesconsulta=$this->recortarDescripcionPublicaciones($publicacionesconsulta,150);
 			$publicaciones=$publicacionesconsulta->publicaciones;
 			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
 			$cantidadPaginasDePublicaciones=$cantidadTotalPublicaciones/$filtro->cant;
@@ -66,6 +67,7 @@
 			$filtro = $this->obtenerFiltro($_POST);
 			$publicacionesconsulta=$this->publicacionesModel->obtenerPublicacionesConFiltro($filtro);
 			$publicacionesconsulta=$this->agregarImagenAPublicaciones($publicacionesconsulta);
+			$publicacionesconsulta=$this->recortarDescripcionPublicaciones($publicacionesconsulta,150);
 			$publicaciones=$publicacionesconsulta->publicaciones;
 			$cantidadTotalPublicaciones=$publicacionesconsulta->cantTotal;
 			$cantidadPaginasDePublicaciones=$filtro->cant>$cantidadTotalPublicaciones?
@@ -87,6 +89,15 @@
 			}
 			$publicaciones->publicaciones=$publicacionesarray;
 			return $publicaciones;
+		}
+
+		private function recortarDescripcionPublicaciones($publicaciones){
+			$publicacionesarray=$publicaciones->publicaciones;
+			foreach ($publicacionesarray as $key => $value) {
+				$publicacionesarray[$key]['descripcion'] = $this->recortarDescripcion($publicacionesarray[$key]['descripcion'] , 150);
+			}
+			$publicaciones->publicaciones=$publicacionesarray;
+			return $publicaciones;	
 		}
 
 		public function registro(){
