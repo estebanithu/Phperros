@@ -41,7 +41,7 @@ _pubreg.servcom.f.agregarImagenAPublicacion= function(idpublicacion,base64image,
 	    processData: false,
 	    contentType: false
 	}).done(function(data) {
-			console.log(data);
+			//console.log(data);
 	       _pubreg.f.agregarImagenAPublicacionCompletado();
 	});
 }
@@ -153,6 +153,7 @@ _pubreg.f.validarForm = function(){
 }
 
 _pubreg.f.registrarPublicacionCompletado = function(response){
+		console.log(response.id);
 		_pubreg.temp.idpublicacion=response.id;
 		_pubreg.temp.imagenesCanvasParaEnviar=$("#tabla-imagenes canvas").toArray();
 		_pubreg.temp.nombresDeImagenesParaEnviar=$("#tabla-imagenes .name").toArray();
@@ -164,6 +165,7 @@ _pubreg.f.agregarImagenAPublicacion=function(){
 	if(_pubreg.temp.imagenesCanvasParaEnviar.length>0){
 			var imgCanvas = _pubreg.temp.imagenesCanvasParaEnviar.shift();//remueve el primero y lo devuelve
 			var nombre = $(_pubreg.temp.nombresDeImagenesParaEnviar.shift()).html();
+			nombre=nombre.split(".")[0];
 			if (imgCanvas.toBlob) {
 	    		imgCanvas.toBlob(
 			        function (blob) {

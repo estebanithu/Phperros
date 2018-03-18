@@ -68,7 +68,7 @@
 			  </div>
 			  </div>
 			  <hr>
-			  <form id="fileupload" action="Publicacion/registro" method="POST" enctype="multipart/form-data">
+			  <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
 				<span class="btn btn-success fileinput-button">
 		            <i class="glyphicon glyphicon-plus"></i>
 		            <span>Agregue imagenes...</span>
@@ -102,12 +102,12 @@
 	            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
 	        </td>
 	        <td>
-	            <!--{% if (!i && !o.options.autoUpload) { %}
+	            {% if (!i && !o.options.autoUpload) { %}
 	                <button class="btn btn-primary start" disabled>
 	                    <i class="glyphicon glyphicon-upload"></i>
 	                    <span>Start</span>
 	                </button>
-	            {% } %}-->
+	            {% } %}
 	            {% if (!i) { %}
 	                <button class="btn btn-warning cancel">
 	                    <i class="glyphicon glyphicon-ban-circle"></i>

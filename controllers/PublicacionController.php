@@ -2,6 +2,8 @@
 
 	class PublicacionController extends BaseController{
 
+		private $root_images="uploads/";
+
 		public function __construct(){
 			parent::__construct();
 			require_once 'models/PublicacionesModel.php';
@@ -72,13 +74,17 @@
 			if($_POST){
 				$publicacion = $this->obtenerPublicacion($_POST);
 				//echo json_encode(array('prueba'=>$publicacion->esValida()));
-				if($publicacion->esValida())
-					echo json_encode(array('id' => $this->publicacionesModel->registrarPublicacion($publicacion)));
+				if($publicacion->esValida()){
+					$id = $this->publicacionesModel->registrarPublicacion($publicacion);
+					mkdir($this->root_images.$id);
+					echo json_encode(array('id' => $id));
+				}
 				else{
 					echo json_encode(array('error' =>"Se produjo un error"));
 				}
 			}
 			else{
+				
 				$especies = $this->especiesModel->obtenerEspecies();
 				$razas = $this->razasModel->obtenerRazas();
 				$barrios = $this->barriosModel->obtenerBarrios();
@@ -97,11 +103,26 @@
 				$imagen = $_POST["imagen"];
 				$idpublicacion = $_POST["idpublicacion"];
 
-				echo json_encode(array(
-										'imagen'=>$imagen,
-									  'nombreimagen' =>$nombreimagen,
-									  'idpublicacion'=>$idpublicacion));
+				$this->obtenerFile($imagen);
+				$file_path =$this->root_images.$idpublicacion."/".$nombreimagen;
+				if(!file_exists($file_path)){
+					$file=$this->obtenerFile($imagen);
+					file_put_contents($file_path,$file);
+				}
+
+				echo json_encode(array("success"=>"Imagen subida correctamente"));
 			}
+		}
+
+		private function obtenerFile($imgEnBase64){
+			if( strpos( $imgEnBase64,',') !== false ) {
+				$base_to_php = explode(',', $imgEnBase64);
+				$data = $base_to_php[1];
+			}else{
+				$data = $imgEnBase64;
+			}
+			$ret = base64_decode($data);
+			return $ret;
 		}
 
 		private function obtenerFiltro($dic){
