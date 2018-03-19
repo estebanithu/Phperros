@@ -16,7 +16,7 @@
                         <a class="fa fa-search input-group-text" style="color:gray"></a>
                   </div>
                    <input id="search-input" class="form-control input-md" placeholder="Buscar..." autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1" name="busqueda"
-                   value="{$busqueda}">
+                   value="{if isset($busqueda)} {$busqueda} {/if}">
                 </div>
             </form>
           {else}
@@ -25,7 +25,7 @@
                         <a class="fa fa-search input-group-text" style="color:gray"></a>
                   </div>
                    <input id="search-input" class="form-control input-md" placeholder="Buscar..." autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1" name="busqueda"
-                   value="{$busqueda}">
+                   value="{if isset($busqueda)} {$busqueda} {/if}">
                 </div>
           {/if}
         </li>

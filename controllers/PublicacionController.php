@@ -27,11 +27,17 @@
 				$publicacion = $this->publicacionesModel->obtenerPublicacion($id);
 				$imagenes = $this->obtenerImagenes($id);
 				$preguntas = $this->publicacionesModel->obtenerPreguntas($id);
+				$this->asignarCoordenadas($publicacion);
 				$this->miSmarty->assign("imagenes", $imagenes);
 				$this->miSmarty->assign("publicacion", $publicacion);
 				$this->miSmarty->assign("preguntas", $preguntas);
 				$this->miSmarty->display('publicacion/publicacion-detalle.tpl');
 			}
+		}
+
+		private function asignarCoordenadas($publicacion){
+			$existenCoordenadas = !is_null($publicacion['latitud']) && !is_null($publicacion['longitud']);
+			$this->miSmarty->assign("existenCoordenadas", $existenCoordenadas);
 		}
 
 		public function vertodas(){
@@ -156,11 +162,13 @@
 
 		private function obtenerImagenes($id){
 			$dir = 'uploads/'.$id.'/';
-			$imagenes = scandir($dir);
 			$retorno = array();
-			foreach ($imagenes as $img) {
-				if($img != '.' && $img != '..'){
-					array_push($retorno, $dir.$img);
+			if(is_dir($dir)){
+				$imagenes = scandir($dir);
+				foreach ($imagenes as $img) {
+					if($img != '.' && $img != '..'){
+						array_push($retorno, $dir.$img);
+					}
 				}
 			}
 			return $retorno;

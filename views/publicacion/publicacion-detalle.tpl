@@ -2,6 +2,9 @@
 <body>
 <script type='text/javascript' src='js/owl.carousel.min.js'></script>
 <script type='text/javascript' src='js/publicacion-detalle.js'></script>
+{if $existenCoordenadas}
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1w02yNO4juQRBJBaSE20p2-CZMZlaP5A&callback=initMap" async defer></script>
+{/if}
 <link rel='stylesheet' type='text/css' href='css/publicacion-detalle.css'>
 {include file='navBar.tpl'}
 {if $publicacion.abierta == 0}
@@ -33,21 +36,25 @@
 			{/if}
 			<h4>Descripción</h4>
 			{$publicacion.descripcion}
-		<hr>
-		<div>
-			<h4>Contacto</h4>
-			<div><i class='fa fa-user'></i> {$publicacion.usr_nom}</div>
-			<div><i class='fa fa-envelope'></i> <a href='mailto:{$publicacion.usr_email}' target='_top'>{$publicacion.usr_email}</a></div>
-		</div>
+			<hr>
+			<div>
+				<h4>Contacto</h4>
+				<div><i class='fa fa-user'></i> {$publicacion.usr_nom}</div>
+				<div><i class='fa fa-envelope'></i> <a href='mailto:{$publicacion.usr_email}' target='_top'>{$publicacion.usr_email}</a></div>
+			</div>
+			{include file='publicacion/ubicacion-mascota.tpl'}
 			{include file='publicacion/cerrar-publicacion.tpl'}	
 			<hr>
 			<div>
 				<a href="Publicacion/generarPublicacionPDF/{$publicacion.id}" target="_blank" class="btn btn-success"><i class='fa fa-file-pdf-o'></i> Generar PDF</a>
 			</div>
 		</div>
+	</div>
 	</section>
 	<hr>
 	{include file='publicacion/preguntas-y-respuestas.tpl'}	
 </div>
 	{include file='footer.tpl'}
+	<span id='lat'>{$publicacion.latitud}</span>
+	<span id='lon'>{$publicacion.longitud}</span>
 </body>

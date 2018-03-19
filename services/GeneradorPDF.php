@@ -6,6 +6,7 @@
         function __construct(){
             parent::__construct();
             $this->AddPage();
+            define('FOTO_POR_DEFECTO', 'img/defecto.png');
         }
 
         public function generarPublicacionEnPDF($publicacion,$fotosPublicacion){     
@@ -67,8 +68,13 @@
 
         private function imprimirImagenes($imagenes){
             $this->SetY(50);
-            foreach ($imagenes as $foto) {
-                $this->Image($foto,NULL,NULL,70);
+            if(count($imagenes) > 0){
+                foreach ($imagenes as $foto) {
+                    $this->Image($foto,NULL,NULL,70);
+                    $this->Ln(1);
+                }
+            }else{
+                $this->Image(FOTO_POR_DEFECTO,NULL,NULL,70);
                 $this->Ln(1);
             }
         }
