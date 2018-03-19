@@ -31,7 +31,7 @@
 	                    <a id="nueva-publicacion" class="btn btn-block btn-lg btn-success submit" type="button" href="Publicacion/registro/">Registrar nueva publicación</a>
 	                </div>
 	                <div class="row">
-	                 	<a id="ver-publicaciones" class="btn btn-block btn-lg btn-primary submit" type="button">
+	                 	<a href='PanelUsuario' id="ver-publicaciones" class="btn btn-block btn-lg btn-primary submit" type="button">
 	                 		Ver mis publicaciones
 	                 	</a>
 	                </div>
