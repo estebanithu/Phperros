@@ -267,6 +267,12 @@
 				if(isset($dic['barrio'])){
 					$publicacion->barrio=$dic['barrio'];
 				}
+				if(isset($dic['latitud'])){
+					$publicacion->latitud=$dic['latitud'];
+				}
+				if(isset($dic['longitud'])){
+					$publicacion->longitud=$dic['longitud'];
+				}
 			}
 			return $publicacion;
 		}

@@ -3,6 +3,12 @@ _pubreg.f={}
 _pubreg.temp={}
 _pubreg.servcom={}
 _pubreg.servcom.f={}
+_pubreg.googlemap={}
+_pubreg.googlemap.f={}
+_pubreg.googlemap.g={}
+
+ _pubreg.googlemap.g.map=undefined;
+ _pubreg.googlemap.g.marker=undefined;
 
 $(document).ready(function(){
 	_pubreg.f.initialize();
@@ -31,6 +37,7 @@ _pubreg.servcom.f.registrarPublicacion= function(publicacion,callback){
 
 _pubreg.f.initialize = function(){
 
+	_pubreg.googlemap.f.initMap();
 	$(document).on("click","#btn-registrar",_pubreg.f.registrarPublicacion);
 	$(document).on("click","#close-error",function(){$("#container-error").addClass("oculto")});
 	$(document).on("change","#select-especie",_pubreg.f.cambioEspecie);
@@ -46,8 +53,6 @@ _pubreg.f.cambioEspecie = function(){
 		$("#select-raza option:not(*[data-especieid='"+especieid+"']):not(*[data-especieid='-1'])").addClass("oculto")
 		$("#select-raza").val("-1")
 	}
-
-	
 
 }
 
@@ -72,6 +77,11 @@ _pubreg.f.registrarPublicacion = function(callback){
 			especie:especie,
 			raza:raza,
 			barrio:barrio
+		}
+
+		if(_pubreg.googlemap.g.marker){
+			publicacion.latitud= _pubreg.googlemap.g.marker.position.lat();
+			publicacion.longitud= _pubreg.googlemap.g.marker.position.lng();
 		}
 
 		_pubreg.servcom.f.registrarPublicacion(publicacion,_pubreg.f.registrarPublicacionCompletado)
@@ -165,3 +175,35 @@ _pubreg.f.registrarPublicacionCompletado = function(response){
 	}
 
 }
+
+ //ejemplo https://developers.google.com/maps/documentation/javascript/examples/marker-remove?hl=es-419
+
+
+ _pubreg.googlemap.f.initMap = function() {
+    var pos={lat: -34.8859834,
+      		 lng: -56.1336387}
+
+     _pubreg.googlemap.g.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: pos
+    });
+
+     _pubreg.googlemap.g.map.addListener('click', function(event) {
+      _pubreg.googlemap.f.addMarker(event.latLng);
+    });
+    // Adds a marker at the center of the map.
+    //addMarker(pos);
+  }
+
+  // Adds a marker to the map and push to the array.
+  _pubreg.googlemap.f.addMarker =function (location) {
+  	google.maps.event.clearListeners(_pubreg.googlemap.g.map, 'click');
+     _pubreg.googlemap.g.marker = new google.maps.Marker({
+      position: location,
+      animation: google.maps.Animation.DROP,
+      draggable: true,
+      map: _pubreg.googlemap.g.map
+    });
+  }
+
+

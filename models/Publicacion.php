@@ -12,8 +12,8 @@
 		public $abierto=1;
 		public $usuario;
 		public $exitoso=NULL;
-		public $latitud=-34.82296900;
-		public $longitud=-56.20121800;
+		public $latitud=NULL;
+		public $longitud=NULL;
 
 		public function esValida(){
 			return 
