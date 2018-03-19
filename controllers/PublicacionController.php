@@ -101,6 +101,7 @@
 		}
 
 		public function registro(){
+			$this->restringirALogueados();
 			if($_POST){
 				$publicacion = $this->obtenerPublicacion($_POST);
 				//echo json_encode(array('prueba'=>$publicacion->esValida()));
@@ -243,9 +244,10 @@
 			$pdf = new PDF();
 			$pdf->generarPublicacionEnPDF($publicacion,$fotosPublicacion);
 		}
+		
 		private function obtenerPublicacion($dic){
-
 			$publicacion = new Publicacion();
+			$publicacion->usuario = $_SESSION['usuarioLogueado']['id'];
 			if($dic){
 				if(isset($dic['titulo'])){
 					$publicacion->titulo=$dic['titulo'];

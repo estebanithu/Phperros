@@ -4,12 +4,11 @@ li{
 #container-principal{
 	min-width: 100%;
 	min-height: 500px;
-	background-color: lavender
 }
 
 #container-filtros{
 	padding:10px 0px;
-	background-color:lightslategray;
+	background-color:#909294;
 	color:white;
 }
 .filtros h3{

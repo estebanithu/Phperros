@@ -93,7 +93,7 @@
 				  <div class="row fileupload-buttonbar">
 	            	<div class="col-lg-7">
 						<span class="btn btn-success fileinput-button">
-				            <i class="glyphicon glyphicon-plus"></i>
+				            <i class="fa fa-plus-circle"></i>
 				            <span>Agregue imagenes...</span>
 				            <input type="file" name="files[]" multiple>
 			         	</span>
@@ -119,7 +119,7 @@
 		         			
 		         		</tbody>
 		         	</table>
-		         	<input id="btn-registrar" class="btn btn-block btn-lg btn-success submit" type="button" value="Registrar"><br>
+		         	<button id="btn-registrar" class="btn btn-block btn-lg btn-success submit" type="button"><i class='fa fa-pencil'></i> Registrar</button>
 	    	</form>
 		</div>
 	</div>

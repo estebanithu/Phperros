@@ -15,7 +15,7 @@
 					<label class="checkbox-inline">
 						<!--<input type="checkbox" id="remember" value="Remember me"> Remember me-->
 					</label>
-					<button class="btn btn-block btn-lg btn-success submit" type="submit"> <i class="fa fa-check-square"></i> Registrarme!</button>
+					<button class="btn btn-block btn-lg btn-success submit" type="submit"> <i class="fa fa-pencil"></i> Registrarme!</button>
 				</form>
 				{if isset($mensaje)}
 				<hr>

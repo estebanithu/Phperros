@@ -8,7 +8,6 @@
 #container-principal{
 	padding:50px;
 	min-height: 400px;
-	background-color: 	#ddd;
 }
 #container-error{
 	position:fixed;
@@ -29,7 +28,7 @@
 #container-form-fields{
 	margin:25px auto 25px auto !important;
 	max-width: 500px;
-	background-color: #f3f3f3;
+	background-color: #ddd;
 	border-radius: 5px;
 	padding:10px;
 }
@@ -45,7 +44,7 @@
 @media (max-width:500px){
 
 	#container-principal{
-		background-color: 	#f3f3f3;
+		background-color: 	#ddd;
 	}
 	#container-form-fields{
 		padding:0px;

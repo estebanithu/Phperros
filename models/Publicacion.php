@@ -10,7 +10,7 @@
 		public $raza;
 		public $barrio;
 		public $abierto=1;
-		public $usuario=1;
+		public $usuario;
 		public $exitoso=NULL;
 		public $latitud=-34.82296900;
 		public $longitud=-56.20121800;

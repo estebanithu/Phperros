@@ -20,7 +20,7 @@
 					  <strong>Error!</strong> {$error}.
 					</div>
 				{/if}
-			<a href="Registro" class="btn btn-sm btn-primary register"><i class="fa fa-check-square"></i> Registrarse</a>
+			<a href="Registro" class="btn btn-sm btn-primary register"><i class="fa fa fa-pencil"></i> Registrarse</a>
 			<!--<a href="#" class="btn btn-sm btn-default forgot">Forgot your password?</a>-->
 	</div>
 </div>
