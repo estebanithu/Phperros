@@ -13,6 +13,15 @@
 		    return $cn->restantesRegistros();
 		}
 
+		public function obtenerPublicacionesUsuario($usuario_id) {
+		    $cn = $this->getConexion();
+		    $cn->consulta("SELECT id,titulo,IF(tipo = 'E','Encontrado','Perdido') as tipo, IF(abierto = 1,'Abierta','Cerrada') as estado from publicaciones WHERE usuario_id = :usuario_id",
+		    	array(
+		    		array("usuario_id", intval($usuario_id), 'int')
+		    	));
+		    return $cn->restantesRegistros();
+		}
+
 		public function obtenerPublicacionesConFiltro($filtro) {
 		    $cn = $this->getConexion();
 		    $consultaResultado = new PublicacionConsultaResultado();
@@ -133,6 +142,26 @@
 					array("idPublicacion", intval($idPublicacion), 'int')
 				)
 			);
+		}
+
+		public function totalPublicaciones(){
+			$cn = $this->getConexion();
+			$cn->consulta(
+				   "SELECT COUNT(*) AS totalPublicaciones FROM publicaciones WHERE 1"
+			);
+
+			$registro = $cn->siguienteRegistro();
+			return $registro['totalPublicaciones'];
+		}
+
+		public function obtenerPublicacionesPorEspecie(){
+			$cn = $this->getConexion();
+			$cn->consulta(
+				   "SELECT e.nombre, SUM(CASE WHEN p.abierto = 1 THEN 1 ELSE 0 END) AS abiertas, SUM(CASE WHEN p.abierto = 0 THEN 1 ELSE 0 END) AS cerradas,  SUM(CASE WHEN p.exitoso = 1 THEN 1 ELSE 0 END) AS exitosas,  SUM(CASE WHEN p.exitoso = 0 THEN 1 ELSE 0 END) AS fracasadas
+					FROM publicaciones  p JOIN especies e ON p.especie_id = e.id 
+					WHERE 1 GROUP BY p.especie_id"
+			);
+			return $cn->restantesRegistros();
 		}
 
 	}

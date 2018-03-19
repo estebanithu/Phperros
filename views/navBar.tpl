@@ -35,6 +35,9 @@
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
+              <a class="nav-link" href="PanelUsuario"><i class='fa fa-user'></i> Panel de usuario</a>
+          </li>
+          <li class="nav-item">
               <a class="nav-link" href="Login/logout"><i class='fa fa-sign-out'></i> Cerrar sesión</a>
           </li>
           {else}

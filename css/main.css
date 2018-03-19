@@ -15,7 +15,28 @@ ul{
 .oculto{
 	display:none;
 }
+
 .obligatorio:after{
 	content:" *";
 	color:red;
+}
+
+.center{
+	text-align: center;
+}
+
+#contenedor-panel{
+	min-height: 700px;
+}
+
+#estadisticas-totales{
+	text-align: center;
+}
+
+.single_counter i{
+	font-size: 100px;
+}
+
+.single_counter p{
+	font-weight: bold;
 }
