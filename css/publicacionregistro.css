@@ -42,6 +42,11 @@
 	display: none;
 }
 
+#map {
+height: 100%;
+height: 200px;
+}
+
 @media (max-width:500px){
 
 	#container-principal{
