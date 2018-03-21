@@ -4,7 +4,7 @@
 {include file='navBar.tpl'}
 <div class="container">
 	<div class="login">
-		<h4>Ingresar a Phperros&Cia.</h4>
+		<h4>Ingresar a {$nombreSitio}.</h4>
 			<hr>
         		<form method="POST" action="Login/login" class="login-inner">
     				<input type="email" required class="form-control email" name="email" id="email-input" placeholder="Email">

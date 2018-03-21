@@ -13,7 +13,7 @@
 
       <!-- Page Heading -->
       <h1 class="my-4">Ahora!
-        <small>Ultimos 10 anuncios en Phperros&Cia.</small>
+        <small>Ultimos {$cantidadAnunciosHome} anuncios en {$nombreSitio}</small>
       </h1>
 
       <div class="row">

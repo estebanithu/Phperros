@@ -6,9 +6,11 @@
 			parent::__construct();
 			require_once 'models/PublicacionesModel.php';
 			$this->publicacionesModel = new PublicacionesModel();
+			$this->cantidadAnunciosHome = intval($_SERVER['SITIO_CANTIDAD_ANUNCIOS_HOME']);
 		}
 
 		public function index(){
+			//var_dump($this->cantidadAnunciosHome);die();
 			$publicaciones = $this->obtenerPublicacionesHome();
 			foreach ($publicaciones as $key => $value) {
 				//$publicaciones[$key]['img'] = 'uploads/'.$value['id'].'/1.jpg';
@@ -19,7 +21,7 @@
 		}
 
 		private function obtenerPublicacionesHome(){
-			$publicaciones = $this->publicacionesModel->obtenerPublicacionesHome();
+			$publicaciones = $this->publicacionesModel->obtenerPublicacionesHome($this->cantidadAnunciosHome);
 			foreach ($publicaciones as $i => $value) {
 				$publicaciones[$i]['descripcion'] = $this->recortarDescripcion($publicaciones[$i]['descripcion'] , 150);
 			}

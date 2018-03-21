@@ -5,7 +5,7 @@
 {include file='navBar.tpl'}
 <div class="container">
 	<div class="login">
-		<h4>Registrarse en Phperros&Cia.</h4>
+		<h4>Registrarse en {$nombreSitio}</h4>
 			<hr>
         		<form id="formRegistro" method="POST" action="Registro/registro" class="login-inner">
     				<input type="text" required class="form-control" id="nombre-completo" name="nombre-completo" placeholder="Nombre Completo">

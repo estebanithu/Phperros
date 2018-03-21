@@ -10,8 +10,9 @@
 			if (session_status() == PHP_SESSION_NONE) {
 			    session_start();
 			}
-			$this->home = 'https://192.168.56.101/Phperros/';
-			$this->miSmarty = getSmarty();
+			$this->asignarVariablesConfig();
+			
+			
 			$hayUsuarioLogueado = $this->estaLogueado();
 
 			if($hayUsuarioLogueado){
@@ -20,6 +21,16 @@
 			}
 
 			$this->miSmarty->assign('hayUsuarioLogueado', $hayUsuarioLogueado);
+		}
+
+		private function asignarVariablesConfig(){
+			$this->miSmarty = getSmarty();
+			$this->home = $_SERVER['SITIO_URL'];
+			$this->miSmarty->assign('baseUrl', $_SERVER['BASE_HEADER']);
+			$this->miSmarty->assign('nombreSitio', $_SERVER['SITIO_NOMBRE']);
+			$this->miSmarty->assign('autorSitio', $_SERVER['SITIO_AUTOR']);
+			$this->miSmarty->assign('descripcionSitio', $_SERVER['SITIO_DESCRIPCION']);
+			$this->miSmarty->assign('cantidadAnunciosHome', $_SERVER['SITIO_CANTIDAD_ANUNCIOS_HOME']);
 		}
 
 

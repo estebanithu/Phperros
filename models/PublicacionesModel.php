@@ -7,9 +7,14 @@
 			require_once 'models/PublicacionConsultaResultado.php';
 		}
 		
-		public function obtenerPublicacionesHome() {
+		public function obtenerPublicacionesHome($cantidad=NULL) {
 		    $cn = $this->getConexion();
-		    $cn->consulta("SELECT * from publicaciones WHERE abierto = 1 ORDER BY id LIMIT 10");
+		    $sql = "SELECT * from publicaciones WHERE abierto = 1 ORDER BY id";	
+		    if(is_null($cantidad)){
+		    	$cantidad = 10;
+		    }
+			$sql.=" LIMIT ".$cantidad;
+		    $cn->consulta($sql);
 		    return $cn->restantesRegistros();
 		}
 

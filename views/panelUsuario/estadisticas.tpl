@@ -9,7 +9,7 @@
     <!-- Page Content -->
     <div id="contenedor-panel" class="container">
     	<h3 class="my-4">
-    		Estadisticas en Phperros&cia.
+    		Estadisticas en {$nombreSitio}
     	</h3>
 
 	    <section id="counter" class="counter">

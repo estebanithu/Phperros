@@ -1,4 +1,4 @@
-<div>Estas son tus publicaciones en Phperros&Cia:</div>
+<div>Estas son tus publicaciones en {$nombreSitio}:</div>
 <div class="table-responsive">
 	<table class="table">
 	  <thead>

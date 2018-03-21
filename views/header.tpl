@@ -1,11 +1,11 @@
   <head>
-    <base href="/Phperros/">
+    <base href="{$baseUrl}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Phperros&Cia. Perdidos y encontrados">
-    <meta name="author" content="Esteban Ithurralde - Rodrigo Pintos">
+    <meta name="description" content="{$descripcionSitio}">
+    <meta name="author" content="{$autorSitio}">
 
-    <title>Phperros&Cia. perdidos y encontrados</title>
+    <title>{$nombreSitio}</title>
     <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
     
     <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
