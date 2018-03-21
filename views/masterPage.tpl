@@ -12,11 +12,17 @@
     <div class="container" style="padding-bottom: 50px;">
 
       <!-- Page Heading -->
-      <h1 class="my-4">Ahora!
-        <small>Ultimos {$cantidadAnunciosHome} anuncios en {$nombreSitio}</small>
-      </h1>
-
       <div class="row">
+        <div class="col-md-10 col-sm-10 col-xs-12">
+          <h1 class="my-4">Ahora!
+            <small>Últimos {$cantidadAnunciosHome} anuncios en {$nombreSitio}</small>
+          </h1>
+        </div>
+        <div>
+           <a href="Publicacion/vertodas" class="fa fa-search" style="position:relative;top:45%; font-size:23px">Ver todas</a>
+        </div>
+      </div>
+      <div class="row my-4">
 
           {foreach from=$publicaciones item=pub}
 

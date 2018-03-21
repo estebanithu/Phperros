@@ -24,8 +24,14 @@
                   <div class="input-group-prepend">
                         <a class="fa fa-search input-group-text" style="color:gray"></a>
                   </div>
-                   <input id="search-input" class="form-control input-md" placeholder="Buscar..." autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1" name="busqueda"
-                   value="{if isset($busqueda)} {$busqueda} {/if}">
+                  {if isset($busqueda)} 
+                    <input id="search-input" class="form-control input-md" placeholder="Buscar..." autocomplete= "off" spellcheck="false" autocorrect="off" tabindex="1" name="busqueda"
+                       value="">
+                  {else}  
+                    <input id="search-input" class="form-control input-md" placeholder="Buscar..." autocomplete=   "off" spellcheck="false" autocorrect="off" tabindex="1" name="busqueda"
+                       value="{$busqueda} ">
+                  {/if}
+                  
                 </div>
           {/if}
         </li>

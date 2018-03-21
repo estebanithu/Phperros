@@ -11,10 +11,10 @@
 
 <link rel="stylesheet" type="text/css" href="css/publicacionregistro.css">
  <!--GOOGLE MAP -->
- <script async defer
+<script async defer
     src="https://maps.googleapis.com/maps/api/js?key=
 			    AIzaSyC1w02yNO4juQRBJBaSE20p2-CZMZlaP5A&callback=initMap">
- </script>
+</script>
 <!--GOOGLE MAP -->
 <script type="text/javascript" src="js/publicacionregistro.js"></script>
 
@@ -238,41 +238,3 @@
 <script src="vendor/fileupload/js/jquery.fileupload-ui.js"></script>
 <script src="vendor/fileupload/js/main.js"></script>
 <!--FILE UPLOAD-->
-
-
-{literal}
-<script>
-  //ejemplo https://developers.google.com/maps/documentation/javascript/examples/marker-remove?hl=es-419
- /* var map;
-  var marker;
-
-  function initMap() {
-    var pos={lat: -34.8859834,
-      		 lng: -56.1336387}
-
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-      center: pos
-    });
-
-    map.addListener('click', function(event) {
-      addMarker(event.latLng);
-    });
-    // Adds a marker at the center of the map.
-    //addMarker(pos);
-  }
-
-  // Adds a marker to the map and push to the array.
-  function addMarker(location) {
-  	google.maps.event.clearListeners(map, 'click');
-    marker = new google.maps.Marker({
-      position: location,
-      animation: google.maps.Animation.DROP,
-      draggable: true,
-      map: map
-    });
-  }*/
- 
-</script>
- {/literal}
-
