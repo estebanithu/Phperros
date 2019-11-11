@@ -9,7 +9,7 @@
 		
 		public function obtenerPublicacionesHome($cantidad=NULL) {
 		    $cn = $this->getConexion();
-		    $sql = "SELECT * from publicaciones WHERE abierto = 1 ORDER BY id";	
+		    $sql = "SELECT * from publicaciones WHERE abierto = 1 ORDER BY id DESC";	
 		    if(is_null($cantidad)){
 		    	$cantidad = 10;
 		    }
