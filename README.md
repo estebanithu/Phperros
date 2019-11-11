@@ -1,4 +1,4 @@
-Obligatorio de: Taller de programación, Enero 2018.
+Obligatorio de Taller de programación, Enero 2018.
 
 Se desea implementar una aplicación para ayudar a los dueños de mascotas que se pierden a encontrarlas. Para ello es necesario desarrollar una web que permita registrar mascotas perdidas o encontradas, y que ofrezca una funcionalidad de búsqueda sobre este registro.
 
@@ -20,16 +20,17 @@ Dentro de la publicación se debe ofrecer la opción de exportarla a pdf, lo que
 Registro en la plataforma: Para poder ingresar un anuncio o realizar una pregunta, los usuarios deben estar registrados. Para ello debe existir un link en la página de inicio que permita acceder a un formulario de registro, en el que se pedirá el email del usuario, su nombre completo y una contraseña. El identificador del usuario es el email, por lo que no pueden haber repetidos. La contraseña debe tener al menos 8 caracteres, una letra y un número.
 
 Inicio de sesión: Debe existir un link en la página principal que permita acceder a una página de inicio de sesión. Desde allí los usuarios registrados podrán iniciar su sesión, indicando su email y contraseña. Una vez iniciada la sesión, deben poder ver en el menú la opción de registrar un aviso, que solo debe ser visible para usuarios registrados que iniciaron sesión.
+
 Registro de una publicación: Los usuarios registrados pueden crear una nueva publicación, para lo que se pedirán todos los datos mencionados anteriormente. Una publicación debe tener al menos una foto, pudiendo tener varias si el usuario las provee. Al crear los avisos los mismos quedan en estado “abierto”, y comienzan a aparecer como resultados de las búsquedas en forma inmediata.
 Los datos de especie, raza y barrio deben salir de las tablas que se proveerán. La selección de especie y raza debe ser siempre consistente, por lo que se sugiere cargar un combo con las razas posibles solo después de que el usuario indicó la especie.
 
 Cierre de una publicación: El usuario que realizó una publicación debe poder cerrarla, indicando si la mascota ya se reunió con su dueño o no. Las búsquedas en la página principal solo deben mostrar publicaciones abiertas.
 
 Estadísticas: Solo los usuarios registrados que iniciaron sesión deben tener acceso a una página de estadísticas, que permita conocer cuántos avisos de cada tipo se publicaron en total, segregados por especie y estado (cerrados/abiertos). El reporte debe mostrar además cuántos de ellos se cerraron con resultado positivo (el dueño encontró a la mascota) y cuantos con resultado negativo.
+
 Características deseables, pero no obligatorias (permiten compensar puntos perdidos):
-- Al realizar una publicación, solicitar el punto (latitud y longitud) donde se perdió o encontró la mascota. Luego en la página de la publicación, mostrar un mapa centrado y con un marcador en dicho punto. Se recomienza analizar el uso de google maps para
-esto.
-- Que el paginado de los resultados de una búsqueda permita seleccionar de a cuantos
-avisos se desea paginar, ofreciendo de un combo con los valores (10, 20, 50, Todos).
+- Al realizar una publicación, solicitar el punto (latitud y longitud) donde se perdió o encontró la mascota. Luego en la página de la publicación, mostrar un mapa centrado y con un marcador en dicho punto. Se recomienza analizar el uso de google maps para esto.
+
+- Que el paginado de los resultados de una búsqueda permita seleccionar de a cuantos avisos se desea paginar, ofreciendo de un combo con los valores (10, 20, 50, Todos).
 
 Esteban Ithurralde - Rodrigo Pintos - 2018.
