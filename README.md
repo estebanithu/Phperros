@@ -32,4 +32,4 @@ esto.
 - Que el paginado de los resultados de una búsqueda permita seleccionar de a cuantos
 avisos se desea paginar, ofreciendo de un combo con los valores (10, 20, 50, Todos).
 
-Esteban Ithurralde - Rodrigo Pintos. 2018.
+Esteban Ithurralde - Rodrigo Pintos - 2018.
