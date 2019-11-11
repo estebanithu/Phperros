@@ -1,62 +1,35 @@
-# [Start Bootstrap - 3 Col Portfolio](https://startbootstrap.com/template-overviews/3-col-portfolio/)
+Obligatorio de: Taller de programación, Enero 2018.
 
-[3 Col Portfolio](https://startbootstrap.com/template-overviews/3-col-portfolio/) is a three column portfolio layout template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
+Se desea implementar una aplicación para ayudar a los dueños de mascotas que se pierden a encontrarlas. Para ello es necesario desarrollar una web que permita registrar mascotas perdidas o encontradas, y que ofrezca una funcionalidad de búsqueda sobre este registro.
 
-## Preview
+El sitio debe funcionar como un catálogo de avisos, donde los usuarios registrados pueden publicar avisos de mascotas
+encontradas o perdidas. Para poder realizar búsquedas no es necesario estar registrado.
 
-[![3 Col Portfolio Preview](https://startbootstrap.com/assets/img/templates/3-col-portfolio.jpg)](https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/)
+El sitio a desarrollar debe ofrecer la siguiente funcionalidad:
 
-**[View Live Preview](https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/)**
+Página principal (home): Se debe ofrecer un listado con foto de las últimas 10 publicaciones realizadas en el sitio que se encuentren abiertas, ya sea de mascotas encontradas o perdidas. Cada publicación debe mostrar una foto, el título, y los primeros 150 caracteres de su descripción, identificando claramente si se trata de una mascota encontrada o perdida.
+La página debe además ofrecer un conjunto de filtros, para buscar por tipo de publicación (encontrada/perdida), especie (perro, gato, etc.), raza, barrio, o parte del texto, tanto en el título como en la publicación.
 
-## Status
+El listado debe ser paginado de a 10 avisos por pantalla utilizando Ajax, lo que implica que al cambiar de página solo se refresca el listado, y no toda la página. El título de cada aviso en la lista debe ser un link que permita acceder al aviso completo, el que se debe abrir en una pestaña nueva del navegador (ver punto siguiente).
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-3-col-portfolio/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/startbootstrap-3-col-portfolio.svg)](https://www.npmjs.com/package/startbootstrap-3-col-portfolio)
-[![Build Status](https://travis-ci.org/BlackrockDigital/startbootstrap-3-col-portfolio.svg?branch=master)](https://travis-ci.org/BlackrockDigital/startbootstrap-3-col-portfolio)
-[![dependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-3-col-portfolio/status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-3-col-portfolio)
-[![devDependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-3-col-portfolio/dev-status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-3-col-portfolio?type=dev)
+Página de publicación: Cuando se accede a un aviso particular, se debe mostrar un indicador claro de tipo de aviso (encontrada/perdida), un cuadro donde se pueden pasar cada una de las fotos de la publicación (con botones de anterior y siguiente), la especie y raza a la que pertenece la mascota y finalmente el título de la publicación y su descripción.
+En la página de la publicación se deben mostrar además una lista de preguntas realizadas por otros usuarios, y las respuestas dadas por quien hizo la publicación. Se debe poder desde allí, realizar una pregunta, para lo que será necesario estar registrado. Solo el usuario que realizó la publicación puede responder preguntas sobre la misma.
+El link para registrar una pregunta debe decir “Nueva Pregunta” si quien está accediendo a la página es un usuario registrado que inició sesión, e “Inicia sesión para realizar una pregunta” si no se ha iniciado sesión.
+Dentro de la publicación se debe ofrecer la opción de exportarla a pdf, lo que debe generar un archivo que contenga todos los datos de la publicación, incluidas las fotos.
+    
+Registro en la plataforma: Para poder ingresar un anuncio o realizar una pregunta, los usuarios deben estar registrados. Para ello debe existir un link en la página de inicio que permita acceder a un formulario de registro, en el que se pedirá el email del usuario, su nombre completo y una contraseña. El identificador del usuario es el email, por lo que no pueden haber repetidos. La contraseña debe tener al menos 8 caracteres, una letra y un número.
 
-## Download and Installation
+Inicio de sesión: Debe existir un link en la página principal que permita acceder a una página de inicio de sesión. Desde allí los usuarios registrados podrán iniciar su sesión, indicando su email y contraseña. Una vez iniciada la sesión, deben poder ver en el menú la opción de registrar un aviso, que solo debe ser visible para usuarios registrados que iniciaron sesión.
+Registro de una publicación: Los usuarios registrados pueden crear una nueva publicación, para lo que se pedirán todos los datos mencionados anteriormente. Una publicación debe tener al menos una foto, pudiendo tener varias si el usuario las provee. Al crear los avisos los mismos quedan en estado “abierto”, y comienzan a aparecer como resultados de las búsquedas en forma inmediata.
+Los datos de especie, raza y barrio deben salir de las tablas que se proveerán. La selección de especie y raza debe ser siempre consistente, por lo que se sugiere cargar un combo con las razas posibles solo después de que el usuario indicó la especie.
 
-To begin using this template, choose one of the following options to get started:
-* [Download the latest release on Start Bootstrap](https://startbootstrap.com/template-overviews/3-col-portfolio/)
-* Install via npm: `npm i startbootstrap-3-col-portfolio`
-* Clone the repo: `git clone https://github.com/BlackrockDigital/startbootstrap-3-col-portfolio.git`
-* [Fork, Clone, or Download on GitHub](https://github.com/BlackrockDigital/startbootstrap-3-col-portfolio)
+Cierre de una publicación: El usuario que realizó una publicación debe poder cerrarla, indicando si la mascota ya se reunió con su dueño o no. Las búsquedas en la página principal solo deben mostrar publicaciones abiertas.
 
-## Usage
+Estadísticas: Solo los usuarios registrados que iniciaron sesión deben tener acceso a una página de estadísticas, que permita conocer cuántos avisos de cada tipo se publicaron en total, segregados por especie y estado (cerrados/abiertos). El reporte debe mostrar además cuántos de ellos se cerraron con resultado positivo (el dueño encontró a la mascota) y cuantos con resultado negativo.
+Características deseables, pero no obligatorias (permiten compensar puntos perdidos):
+- Al realizar una publicación, solicitar el punto (latitud y longitud) donde se perdió o encontró la mascota. Luego en la página de la publicación, mostrar un mapa centrado y con un marcador en dicho punto. Se recomienza analizar el uso de google maps para
+esto.
+- Que el paginado de los resultados de una búsqueda permita seleccionar de a cuantos
+avisos se desea paginar, ofreciendo de un combo con los valores (10, 20, 50, Todos).
 
-### Basic Usage
-
-After downloading, simply edit the HTML and CSS files included with the template in your favorite text editor to make changes. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
-
-### Advanced Usage
-
-After installation, run `npm install` and then run `gulp dev` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
-
-## Bugs and Issues
-
-Have a bug or an issue with this template? [Open a new issue](https://github.com/BlackrockDigital/startbootstrap-3-col-portfolio/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/3-col-portfolio/).
-
-## Custom Builds
-
-You can hire Start Bootstrap to create a custom build of any template, or create something from scratch using Bootstrap. For more information, visit the **[custom design services page](https://startbootstrap.com/bootstrap-design-services/)**.
-
-## About
-
-Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
-
-* https://startbootstrap.com
-* https://twitter.com/SBootstrap
-
-Start Bootstrap was created by and is maintained by **[David Miller](http://davidmiller.io/)**, Owner of [Blackrock Digital](http://blackrockdigital.io/).
-
-* http://davidmiller.io
-* https://twitter.com/davidmillerskt
-* https://github.com/davidtmiller
-
-Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
-
-## Copyright and License
-
-Copyright 2013-2018 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-3-col-portfolio/blob/gh-pages/LICENSE) license.
+Esteban Ithurralde - Rodrigo Pintos. 2018.
