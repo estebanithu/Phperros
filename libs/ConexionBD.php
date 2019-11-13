@@ -30,7 +30,7 @@ class ConexionBD
 	 */
 	function conectar(){
  		try{ 
-			$this->conexion = new PDO($this->dsn, $this->usuario, $this->clave);
+			$this->conexion = new PDO($this->dsn, $this->usuario, $this->clave, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 			//determino si los errores son por warnings a pantalla o por excepciones
 			if ($this->debugMode){
 				$this->conexion->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
